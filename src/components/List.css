@@ -1,0 +1,25 @@
+.List {
+  display: inline-block;
+  vertical-align: top;
+  width: 280px;
+  margin-right: 10px;
+}
+
+.List-EditTitleBtn {
+  width: 100%;
+  text-align: left;
+  cursor: text;
+}
+
+.List.panel {
+  margin-bottom: 0;
+}
+
+.List:last-child {
+  margin-right: 0;
+}
+
+.List-Cards {
+  display: flex;
+  flex-direction: column;
+}

@@ -1,0 +1,15 @@
+.AddCardForm {
+  width: 100%;
+}
+
+.AddCardForm-Footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.AddCardForm-Btn {
+  flex-grow: 1;
+  margin-right: 5px;
+}

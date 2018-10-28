@@ -1,0 +1,47 @@
+.Card {
+  width: 100%;
+  cursor: pointer;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+.Card:last-child {
+  margin-bottom: 0;
+}
+
+.Card:hover .Card-Del {
+  opacity: 1;
+}
+
+.Card-Text {
+  white-space: normal;
+}
+
+.Card-Comments {
+  display: flex;
+  align-items: center;
+}
+
+.Card-CommentsCount {
+  margin-left: 5px;
+}
+
+.Card-Del {
+  opacity: 0;
+  background-color: rgba(10, 10, 10, 0.2);
+  transition: 0.3s ease;
+  transition-property: opacity, background-color;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+/* .Card-Del:focus {
+  opacity: 1;
+}
+*/
+
+.Card-Del:hover {
+  background-color: hsl(348, 100%, 61%);
+}

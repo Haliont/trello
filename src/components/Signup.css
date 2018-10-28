@@ -1,0 +1,33 @@
+.Signup {
+  display: flex;
+  text-align: center;
+  color: #fff;
+}
+
+.Signup-Bg {
+  background-color: #28c38a;
+}
+
+.Signup-Content {
+  margin: auto;
+}
+
+.Signup-Title {
+  font-size: 2.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.Signup-Label {
+  text-align: center;
+}
+
+.Signup-Btn {
+  border: none;
+  color: #fff;
+  text-transform: uppercase;
+  width: 100%;
+}
+
+.Signup-Btn:hover {
+  color: #fff;
+}
