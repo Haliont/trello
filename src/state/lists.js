@@ -22,7 +22,7 @@ const addList = (
   lists,
 ) => make([...lists, list]);
 
-const setListTitle = (listId, title, lists) => updateItem(listId, title, lists);
+const setListTitle = (listId, title, lists) => updateItem(listId, { title }, lists);
 
 const addCardInList = (listId, cardId, lists) => {
   const { cardIds } = getList(listId, lists);
