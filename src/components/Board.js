@@ -2,7 +2,7 @@ import './Board.css';
 import React, { Component } from 'react';
 import List from './List';
 import CardModal from './CardModal';
-import { updateItem, uid } from '../helpers';
+import { uid } from '../helpers';
 
 import {
   make as makeLists,
@@ -22,6 +22,8 @@ import {
   addCommentInCard,
   removeCommentFromCard,
 } from '../state/cards';
+
+import { addComment, setCommentText, removeComment } from '../state/comments';
 
 const initialLists = [
   {
@@ -152,23 +154,21 @@ class Board extends Component {
       };
 
       return {
-        comments: [...comments, newComment],
+        comments: addComment(newComment, comments),
         cards: addCommentInCard(cardId, newCommentId, cards),
       };
     });
   };
 
   updateComment = commentId => (newCommentText) => {
-    const { comments } = this.state;
-    const updatedComments = updateItem(commentId, {
-      text: newCommentText,
-    }, comments);
-    this.setState({ comments: updatedComments });
+    this.setState(({ comments }) => ({
+      comments: setCommentText(commentId, newCommentText, comments),
+    }));
   };
 
   removeCommentFromCard = cardId => commentId => () => {
     this.setState(({ cards, comments }) => ({
-      comments: comments.filter(({ id }) => commentId !== id),
+      comments: removeComment(commentId, comments),
       cards: removeCommentFromCard(cardId, commentId, cards),
     }));
   };
