@@ -36,13 +36,13 @@ const CardHeader = ({
   </header>
 );
 
-function CardDescription({ description, updateDescription }) {
+function CardDesc({ desc, updateDesc }) {
   return (
-    <div className="Description">
+    <div className="desc">
       <h2>Описание:</h2>
       <TextEditor
-        value={description || 'Добавить описание карточки'}
-        onTextSave={updateDescription}
+        value={desc || 'Добавить описание карточки'}
+        onTextSave={updateDesc}
       />
     </div>
   );
@@ -51,11 +51,11 @@ function CardDescription({ description, updateDescription }) {
 const CardModal = (props) => {
   const {
     title,
-    description,
+    desc,
     listTitle,
     username,
     updateTitle,
-    updateDescription,
+    updateDesc,
     onClose,
     comments,
     onAddComment,
@@ -75,9 +75,9 @@ const CardModal = (props) => {
           updateTitle={updateTitle}
         />
         <CardBody>
-          <CardDescription
-            description={description}
-            updateDescription={updateDescription}
+          <CardDesc
+            desc={desc}
+            updateDesc={updateDesc}
           />
           <CardComments
             comments={comments}
