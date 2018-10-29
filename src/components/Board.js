@@ -232,19 +232,6 @@ class Board extends Component {
         onAddComment={this.addCommentInCard(cardId)}
         onClose={this.closeCardModal}
       />
-      // <CardModal
-      //   title={title}
-      //   desc={desc}
-      //   username={username}
-      //   listTitle={listTitle}
-      //   updateTitle={this.setCardTitle(cardId)}
-      //   updatedesc={this.updateCarddesc(cardId)}
-      //   comments={cardComments}
-      //   onUpdateComment={this.updateComment}
-      //   onAddComment={this.addCommentInCard(cardId)}
-      //   onRemoveComment={this.removeCommentFromCard(cardId)}
-      //   onClose={this.closeCardModal}
-      // />
     );
   }
 
