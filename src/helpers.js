@@ -1,4 +1,4 @@
-const updateItem = (items, itemId, newValues = {}) => {
+const updateItem = (itemId, newValues = {}, items) => {
   const index = items.findIndex(({ id }) => id === itemId);
   const newItem = { ...items[index], ...newValues };
   const newItems = [

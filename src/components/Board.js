@@ -74,7 +74,7 @@ class Board extends Component {
 
     const { cardIds } = lists.find(({ id }) => id === listId);
     const newCardIds = [...cardIds, newCardId];
-    const updatedLists = updateItem(lists, listId, { cardIds: newCardIds });
+    const updatedLists = updateItem(listId, { cardIds: newCardIds }, lists);
 
     this.setState({ lists: updatedLists, cards: newCards });
   };
@@ -85,7 +85,7 @@ class Board extends Component {
     const { cardIds } = lists.find(({ id }) => id === listId);
     const newCardIds = cardIds.filter(id => id !== cardId);
     const newCards = cards.filter(({ id }) => id !== cardId);
-    const updatedLists = updateItem(lists, listId, { cardIds: newCardIds });
+    const updatedLists = updateItem(listId, { cardIds: newCardIds }, lists);
     this.setState({ lists: updatedLists, cards: newCards });
   };
 
@@ -114,15 +114,15 @@ class Board extends Component {
 
   updateCardTitle = cardId => (newTitle) => {
     const { cards } = this.state;
-    const updatedCards = updateItem(cards, cardId, { title: newTitle });
+    const updatedCards = updateItem(cardId, { title: newTitle }, cards);
     this.setState({ cards: updatedCards });
   };
 
   updateCardDescription = cardId => (newDescription) => {
     const { cards } = this.state;
-    const updatedCards = updateItem(cards, cardId, {
+    const updatedCards = updateItem(cardId, {
       description: newDescription,
-    });
+    }, cards);
     this.setState({ cards: updatedCards });
   };
 
@@ -138,17 +138,17 @@ class Board extends Component {
     const newComments = [...comments, newComment];
     const { commentIds } = cards.find(({ id }) => cardId === id);
     const newCommentIds = [...commentIds, newCommentId];
-    const updatedCards = updateItem(cards, cardId, {
+    const updatedCards = updateItem(cardId, {
       commentIds: newCommentIds,
-    });
+    }, cards);
     this.setState({ comments: newComments, cards: updatedCards });
   };
 
   updateComment = commentId => (newCommentText) => {
     const { comments } = this.state;
-    const updatedComments = updateItem(comments, commentId, {
+    const updatedComments = updateItem(commentId, {
       text: newCommentText,
-    });
+    }, comments);
     this.setState({ comments: updatedComments });
   };
 
@@ -156,9 +156,9 @@ class Board extends Component {
     const { cards, comments } = this.state;
     const { commentIds } = cards.find(({ id }) => cardId === id);
     const newCommentIds = commentIds.filter(id => commentId !== id);
-    const updatedCards = updateItem(cards, cardId, {
+    const updatedCards = updateItem(cardId, {
       commentIds: newCommentIds,
-    });
+    }, cards);
     const newComments = comments.filter(({ id }) => commentId !== id);
     this.setState({
       comments: newComments,
