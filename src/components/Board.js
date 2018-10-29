@@ -3,33 +3,42 @@ import React, { Component } from 'react';
 import List from './List';
 import CardModal from './CardModal';
 import { updateItem, uid } from '../helpers';
+import {
+  make as makeLists,
+  setListTitle,
+  addCardInList,
+  removeCardFromList,
+  getList,
+} from '../state/lists';
+
+const initialLists = [
+  {
+    id: 0,
+    title: 'TODO',
+    cardIds: [],
+  },
+  {
+    id: 1,
+    title: 'In Progress',
+    cardIds: [],
+  },
+  {
+    id: 2,
+    title: 'Testing',
+    cardIds: [],
+  },
+  {
+    id: 3,
+    title: 'Done',
+    cardIds: [],
+  },
+];
 
 class Board extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lists: [
-        {
-          id: 0,
-          title: 'TODO',
-          cardIds: [],
-        },
-        {
-          id: 1,
-          title: 'In Progress',
-          cardIds: [],
-        },
-        {
-          id: 2,
-          title: 'Testing',
-          cardIds: [],
-        },
-        {
-          id: 3,
-          title: 'Done',
-          cardIds: [],
-        },
-      ],
+      lists: makeLists(initialLists),
       cards: [],
       comments: [],
       modalData: {
@@ -56,13 +65,12 @@ class Board extends Component {
   }
 
   setListTitle = listId => (newTitle) => {
-    const { lists } = this.state;
-    const updatedLists = updateItem(lists, listId, { title: newTitle });
-    this.setState({ lists: updatedLists });
+    this.setState(({ lists }) => ({
+      lists: setListTitle(listId, newTitle, lists),
+    }));
   };
 
   addCardInList = listId => (newCardTitle) => {
-    const { cards, lists } = this.state;
     const newCardId = uid();
     const newCard = {
       id: newCardId,
@@ -70,23 +78,26 @@ class Board extends Component {
       description: '',
       commentIds: [],
     };
-    const newCards = [...cards, newCard];
 
-    const { cardIds } = lists.find(({ id }) => id === listId);
-    const newCardIds = [...cardIds, newCardId];
-    const updatedLists = updateItem(listId, { cardIds: newCardIds }, lists);
-
-    this.setState({ lists: updatedLists, cards: newCards });
+    this.setState(({ lists, cards }) => {
+      const newCards = [...cards, newCard];
+      return {
+        lists: addCardInList(listId, newCardId, lists),
+        cards: newCards,
+      };
+    });
   };
 
   removeCardFromList = listId => cardId => (event) => {
     event.stopPropagation();
-    const { lists, cards } = this.state;
-    const { cardIds } = lists.find(({ id }) => id === listId);
-    const newCardIds = cardIds.filter(id => id !== cardId);
-    const newCards = cards.filter(({ id }) => id !== cardId);
-    const updatedLists = updateItem(listId, { cardIds: newCardIds }, lists);
-    this.setState({ lists: updatedLists, cards: newCards });
+
+    this.setState(({ lists, cards }) => {
+      const filteredCards = cards.filter(({ id }) => id !== cardId);
+      return {
+        lists: removeCardFromList(listId, cardId, lists),
+        cards: filteredCards,
+      };
+    });
   };
 
   closeCardModal = () => {
@@ -99,7 +110,8 @@ class Board extends Component {
     const { title: cardTitle, description, commentIds } = cards.find(
       ({ id }) => id === cardId,
     );
-    const { title: listTitle } = lists.find(({ id }) => id === listId);
+
+    const { title: listTitle } = getList(listId, lists);
 
     const modalData = {
       title: cardTitle,
