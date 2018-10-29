@@ -4,9 +4,10 @@ import { updateItem, uid } from '../helpers';
 cards = [
   {
     id: 0,
-    title: 'Title of card',
-    cardIds: [1, 2, 3],
-  }
+    title: 'Card title',
+    desc: '',
+    commentIds: [],
+  },
 ]
 * */
 
