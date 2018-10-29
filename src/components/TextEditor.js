@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from 'react';
 
 const View = ({ value, hint, toggleEditing }) => (
   <button
@@ -30,14 +30,14 @@ class TextEditor extends Component {
   static Editor = Editor;
 
   static defaultProps = {
-    hint: "Изменить текст"
+    hint: 'Изменить текст',
   };
 
   constructor(props) {
     super(props);
     this.state = {
       value: props.value,
-      isEditing: false
+      isEditing: false,
     };
   }
 
@@ -50,10 +50,10 @@ class TextEditor extends Component {
     this.setState({ isEditing: !isEditing });
   };
 
-  handleSubmitForm = event => {
+  handleSubmitForm = (event) => {
     event.preventDefault();
     const { value } = this.state;
-    if (value === "") {
+    if (value === '') {
       return;
     }
     const { onTextSave } = this.props;

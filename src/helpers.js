@@ -4,7 +4,7 @@ const updateItem = (items, itemId, newValues = {}) => {
   const newItems = [
     ...items.slice(0, index),
     newItem,
-    ...items.slice(index + 1)
+    ...items.slice(index + 1),
   ];
   return newItems;
 };
@@ -26,6 +26,6 @@ const uid = (function init() {
   };
 
   return next;
-})();
+}());
 
 export { uid, updateItem };

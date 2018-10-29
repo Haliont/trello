@@ -1,7 +1,7 @@
-import "./CardModal.css";
-import React from "react";
-import TextEditor from "./TextEditor";
-import CardComments from "./CardComments";
+import './CardModal.css';
+import React from 'react';
+import TextEditor from './TextEditor';
+import CardComments from './CardComments';
 
 const Bg = () => <div className="CardModal-Bg modal-background" />;
 const Card = ({ children }) => (
@@ -11,7 +11,9 @@ const CardBody = ({ children }) => (
   <section className="modal-card-body">{children}</section>
 );
 
-const CardHeader = ({ title, updateTitle, listTitle, username, onClose }) => (
+const CardHeader = ({
+  title, updateTitle, listTitle, username, onClose,
+}) => (
   <header className="CardModal-CardHead modal-card-head">
     <div className="CardModal-CardHeadInfo">
       <TextEditor value={title} onTextSave={updateTitle} />
@@ -39,14 +41,14 @@ function CardDescription({ description, updateDescription }) {
     <div className="Description">
       <h2>Описание:</h2>
       <TextEditor
-        value={description || "Добавить описание карточки"}
+        value={description || 'Добавить описание карточки'}
         onTextSave={updateDescription}
       />
     </div>
   );
 }
 
-const CardModal = props => {
+const CardModal = (props) => {
   const {
     title,
     description,
@@ -58,7 +60,7 @@ const CardModal = props => {
     comments,
     onAddComment,
     onRemoveComment,
-    onUpdateComment
+    onUpdateComment,
   } = props;
 
   return (

@@ -1,5 +1,5 @@
-import "./Signup.css";
-import React from "react";
+import './Signup.css';
+import React from 'react';
 
 const Signup = ({ onSubmit, textChange }) => (
   <div className="Signup modal">

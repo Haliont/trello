@@ -1,8 +1,8 @@
-import "./List.css";
-import React from "react";
-import Card from "./Card";
-import AddCardForm from "./AddCardForm";
-import TextEditor from "./TextEditor";
+import './List.css';
+import React from 'react';
+import Card from './Card';
+import AddCardForm from './AddCardForm';
+import TextEditor from './TextEditor';
 
 const List = ({
   title,
@@ -10,18 +10,18 @@ const List = ({
   onAddNewCard,
   cards,
   onRemoveCard,
-  onOpenCard
+  onOpenCard,
 }) => (
   <div className="List panel">
-    <TextEditor value={title} onTextSave={titleUpdate} />
+    <TextEditor onTextSave={titleUpdate} value={title} />
     <div className="List-Cards panel-block">
       {cards.map(({ id, title: cardTitle, commentIds }) => (
         <Card
           key={id}
-          title={cardTitle}
+          commentsCount={commentIds.length}
           onOpen={onOpenCard(id)}
           onRemove={onRemoveCard(id)}
-          commentsCount={commentIds.length}
+          title={cardTitle}
         />
       ))}
     </div>

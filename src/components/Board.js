@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import "./Board.css";
-import { updateItem, uid } from "../helpers";
-import List from "./List";
-import CardModal from "./CardModal";
+import React, { Component } from 'react';
+import './Board.css';
+import { updateItem, uid } from '../helpers';
+import List from './List';
+import CardModal from './CardModal';
 
 class Board extends Component {
   constructor(props) {
@@ -11,34 +11,34 @@ class Board extends Component {
       lists: [
         {
           id: 0,
-          title: "TODO",
-          cardIds: []
+          title: 'TODO',
+          cardIds: [],
         },
         {
           id: 1,
-          title: "In Progress",
-          cardIds: []
+          title: 'In Progress',
+          cardIds: [],
         },
         {
           id: 2,
-          title: "Testing",
-          cardIds: []
+          title: 'Testing',
+          cardIds: [],
         },
         {
           id: 3,
-          title: "Done",
-          cardIds: []
-        }
+          title: 'Done',
+          cardIds: [],
+        },
       ],
       cards: [],
       comments: [],
       modalData: {
-        title: ""
+        title: '',
       },
-      isOpenModal: false
+      isOpenModal: false,
     };
-    window.addEventListener("keyup", ({ key }) => {
-      if (key !== "Escape") {
+    window.addEventListener('keyup', ({ key }) => {
+      if (key !== 'Escape') {
         return;
       }
       this.closeCardModal();
@@ -52,24 +52,24 @@ class Board extends Component {
   componentDidUpdate() {
     const { lists, cards, comments } = this.state;
     const boardData = JSON.stringify({ lists, cards, comments });
-    localStorage.setItem("boardData", boardData);
+    localStorage.setItem('boardData', boardData);
   }
 
-  updateListTitle = listId => newTitle => {
+  updateListTitle = listId => (newTitle) => {
     const { lists } = this.state;
     const updatedLists = updateItem(lists, listId, { title: newTitle });
     this.setState({ lists: updatedLists });
   };
 
-  addCardInList = listId => newCardTitle => {
+  addCardInList = listId => (newCardTitle) => {
     const { cards, lists } = this.state;
 
     const newCardId = uid();
     const newCard = {
       id: newCardId,
       title: newCardTitle,
-      description: "",
-      commentIds: []
+      description: '',
+      commentIds: [],
     };
     const newCards = [...cards, newCard];
 
@@ -80,7 +80,7 @@ class Board extends Component {
     this.setState({ lists: updatedLists, cards: newCards });
   };
 
-  removeCardFromList = listId => cardId => event => {
+  removeCardFromList = listId => cardId => (event) => {
     event.stopPropagation();
     const { lists, cards } = this.state;
     const { cardIds } = lists.find(({ id }) => id === listId);
@@ -98,7 +98,7 @@ class Board extends Component {
     const { cards, lists } = this.state;
 
     const { title: cardTitle, description, commentIds } = cards.find(
-      ({ id }) => id === cardId
+      ({ id }) => id === cardId,
     );
     const { title: listTitle } = lists.find(({ id }) => id === listId);
 
@@ -107,48 +107,48 @@ class Board extends Component {
       commentIds,
       description,
       listTitle,
-      cardId
+      cardId,
     };
 
     this.setState({ isOpenModal: true, modalData });
   };
 
-  updateCardTitle = cardId => newTitle => {
+  updateCardTitle = cardId => (newTitle) => {
     const { cards } = this.state;
     const updatedCards = updateItem(cards, cardId, { title: newTitle });
     this.setState({ cards: updatedCards });
   };
 
-  updateCardDescription = cardId => newDescription => {
+  updateCardDescription = cardId => (newDescription) => {
     const { cards } = this.state;
     const updatedCards = updateItem(cards, cardId, {
-      description: newDescription
+      description: newDescription,
     });
     this.setState({ cards: updatedCards });
   };
 
-  addCommentInCard = cardId => commentText => {
+  addCommentInCard = cardId => (commentText) => {
     const { cards, comments } = this.state;
     const { username } = this.props;
     const newCommentId = uid();
     const newComment = {
       id: newCommentId,
       text: commentText,
-      author: username
+      author: username,
     };
     const newComments = [...comments, newComment];
     const { commentIds } = cards.find(({ id }) => cardId === id);
     const newCommentIds = [...commentIds, newCommentId];
     const updatedCards = updateItem(cards, cardId, {
-      commentIds: newCommentIds
+      commentIds: newCommentIds,
     });
     this.setState({ comments: newComments, cards: updatedCards });
   };
 
-  updateComment = commentId => newCommentText => {
+  updateComment = commentId => (newCommentText) => {
     const { comments } = this.state;
     const updatedComments = updateItem(comments, commentId, {
-      text: newCommentText
+      text: newCommentText,
     });
     this.setState({ comments: updatedComments });
   };
@@ -158,12 +158,12 @@ class Board extends Component {
     const { commentIds } = cards.find(({ id }) => cardId === id);
     const newCommentIds = commentIds.filter(id => commentId !== id);
     const updatedCards = updateItem(cards, cardId, {
-      commentIds: newCommentIds
+      commentIds: newCommentIds,
     });
     const newComments = comments.filter(({ id }) => commentId !== id);
     this.setState({
       comments: newComments,
-      cards: updatedCards
+      cards: updatedCards,
     });
   };
 
@@ -204,7 +204,9 @@ class Board extends Component {
     const {
       cards,
       comments,
-      modalData: { title, description, listTitle, cardId }
+      modalData: {
+        title, description, listTitle, cardId,
+      },
     } = this.state;
 
     const { commentIds } = cards.find(({ id }) => id === cardId);

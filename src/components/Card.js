@@ -1,7 +1,9 @@
-import React from "react";
-import "./Card.css";
+import React from 'react';
+import './Card.css';
 
-const Card = ({ title, onOpen, onRemove, commentsCount }) => (
+const Card = ({
+  title, onOpen, onRemove, commentsCount,
+}) => (
   <div className="Card card" onClick={onOpen}>
     <div className="Card-Text">{title}</div>
     <div className="Card-Comments">

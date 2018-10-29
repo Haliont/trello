@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import Board from "./Board";
-import Signup from "./Signup";
+import React, { Component } from 'react';
+import Board from './Board';
+import Signup from './Signup';
 
 class App extends Component {
   state = {
-    username: "",
-    isRegistered: false
+    username: '',
+    isRegistered: false,
   };
 
   componentWillMount() {
-    const username = localStorage.getItem("username");
+    const username = localStorage.getItem('username');
     if (!username) {
       return;
     }
@@ -17,21 +17,23 @@ class App extends Component {
     this.setState({ username, isRegistered: true });
   }
 
-  handleSignup = event => {
+  handleSignup = (event) => {
     event.preventDefault();
     const { username } = this.state;
-    localStorage.setItem("username", username);
+    localStorage.setItem('username', username);
     this.setState({ isRegistered: true });
   };
 
-  handleUserNameChange = event => {
+  handleUserNameChange = (event) => {
     const {
-      target: { value }
+      target: { value },
     } = event;
     this.setState({ username: value });
   };
 
   render() {
+    const foo = x => x;
+    foo();
     const { isRegistered, username } = this.state;
     return isRegistered ? (
       <Board username={username} />

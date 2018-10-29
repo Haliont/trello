@@ -1,9 +1,11 @@
-import React, { Component } from "react";
-import "./AddCardForm.css";
+import React, { Component } from 'react';
+import './AddCardForm.css';
 
 // TODO: поправить стили
 
-const Form = ({ valueChange, value, onSubmit, onClose }) => (
+const Form = ({
+  valueChange, value, onSubmit, onClose,
+}) => (
   <form onSubmit={onSubmit} className="AddCardForm field">
     <div className="control">
       <input
@@ -46,8 +48,8 @@ class AddCardForm extends Component {
   static Form = Form;
 
   state = {
-    value: "",
-    isAdding: false
+    value: '',
+    isAdding: false,
   };
 
   toggleAddingMode = () => {
@@ -59,10 +61,10 @@ class AddCardForm extends Component {
     this.setState({ value: target.value });
   };
 
-  handleSubmitForm = event => {
+  handleSubmitForm = (event) => {
     event.preventDefault();
     const { value } = this.state;
-    if (value === "") {
+    if (value === '') {
       return;
     }
     const { onAddNewCard } = this.props;
