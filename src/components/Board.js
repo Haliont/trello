@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
 import './Board.css';
-import { updateItem, uid } from '../helpers';
+import React, { Component } from 'react';
 import List from './List';
 import CardModal from './CardModal';
+import { updateItem, uid } from '../helpers';
 
 class Board extends Component {
   constructor(props) {
@@ -55,7 +55,7 @@ class Board extends Component {
     localStorage.boardData = boardData;
   }
 
-  updateListTitle = listId => (newTitle) => {
+  setListTitle = listId => (newTitle) => {
     const { lists } = this.state;
     const updatedLists = updateItem(lists, listId, { title: newTitle });
     this.setState({ lists: updatedLists });
@@ -63,7 +63,6 @@ class Board extends Component {
 
   addCardInList = listId => (newCardTitle) => {
     const { cards, lists } = this.state;
-
     const newCardId = uid();
     const newCard = {
       id: newCardId,
@@ -188,7 +187,7 @@ class Board extends Component {
               key={id}
               cards={listCards}
               title={title}
-              titleUpdate={this.updateListTitle(id)}
+              titleUpdate={this.setListTitle(id)}
               onOpenCard={this.openCardModal(id)}
               onRemoveCard={this.removeCardFromList(id)}
               onAddNewCard={this.addCardInList(id)}
