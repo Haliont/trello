@@ -52,7 +52,7 @@ class Board extends Component {
   componentDidUpdate() {
     const { lists, cards, comments } = this.state;
     const boardData = JSON.stringify({ lists, cards, comments });
-    localStorage.setItem('boardData', boardData);
+    localStorage.boardData = boardData;
   }
 
   updateListTitle = listId => (newTitle) => {

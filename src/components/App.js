@@ -9,7 +9,7 @@ class App extends Component {
   };
 
   componentWillMount() {
-    const username = localStorage.getItem('username');
+    const { username } = localStorage;
     if (!username) {
       return;
     }
@@ -20,7 +20,7 @@ class App extends Component {
   handleSignup = (event) => {
     event.preventDefault();
     const { username } = this.state;
-    localStorage.setItem('username', username);
+    localStorage.username = username;
     this.setState({ isRegistered: true });
   };
 
