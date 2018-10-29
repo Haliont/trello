@@ -49,27 +49,19 @@ const initialLists = [
 ];
 
 class Board extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      lists: makeLists(initialLists),
-      cards: makeCards([]),
-      comments: [],
-      modalData: {
-        title: '',
-      },
-      isOpenModal: false,
-    };
-    window.addEventListener('keyup', ({ key }) => {
-      if (key !== 'Escape') {
-        return;
-      }
-      this.closeCardModal();
-    });
-  }
+  state = {
+    lists: makeLists(initialLists),
+    cards: makeCards([]),
+    comments: [],
+    modalData: {
+      title: '',
+    },
+    isOpenModal: false,
+  };
 
   componentWillMount() {
     this.fetchData();
+    window.addEventListener('keyup', this.handleKeyUp);
   }
 
   componentDidUpdate() {
@@ -78,36 +70,16 @@ class Board extends Component {
     localStorage.boardData = boardData;
   }
 
-  setListTitle = listId => (newTitle) => {
-    this.setState(({ lists }) => ({
-      lists: setListTitle(listId, newTitle, lists),
-    }));
-  };
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.handleKeyUp);
+  }
 
-  addCardInList = listId => (newCardTitle) => {
-    const newCardId = uid();
-
-    const newCard = {
-      id: newCardId,
-      title: newCardTitle,
-      desc: '',
-      commentIds: [],
-    };
-
-    this.setState(({ lists, cards }) => ({
-      lists: addCardInList(listId, newCardId, lists),
-      cards: addCard(newCard, cards),
-    }));
-  };
-
-  removeCardFromList = listId => cardId => (event) => {
-    event.stopPropagation();
-
-    this.setState(({ lists, cards }) => ({
-      lists: removeCardFromList(listId, cardId, lists),
-      cards: removeCard(cardId, cards),
-    }));
-  };
+  handleKeyUp = ({ key }) => {
+    if (key !== 'Escape') {
+      return;
+    }
+    this.closeCardModal();
+  }
 
   closeCardModal = () => {
     this.setState({ isOpenModal: false });
@@ -131,19 +103,50 @@ class Board extends Component {
     });
   };
 
-  setCardTitle = cardId => (newTitle) => {
+  handleSetListTitle = listId => (newTitle) => {
+    this.setState(({ lists }) => ({
+      lists: setListTitle(listId, newTitle, lists),
+    }));
+  };
+
+  handleAddCard = listId => (newCardTitle) => {
+    const newCardId = uid();
+
+    const newCard = {
+      id: newCardId,
+      title: newCardTitle,
+      desc: '',
+      commentIds: [],
+    };
+
+    this.setState(({ lists, cards }) => ({
+      lists: addCardInList(listId, newCardId, lists),
+      cards: addCard(newCard, cards),
+    }));
+  };
+
+  handleRemoveCard = listId => cardId => (event) => {
+    event.stopPropagation();
+
+    this.setState(({ lists, cards }) => ({
+      lists: removeCardFromList(listId, cardId, lists),
+      cards: removeCard(cardId, cards),
+    }));
+  };
+
+  handleSetCardTitle = cardId => (newTitle) => {
     this.setState(({ cards }) => ({
       cards: setCardTitle(cardId, newTitle, cards),
     }));
   };
 
-  updateCardDesc = cardId => (newDesc) => {
+  handleSetCardDesc = cardId => (newDesc) => {
     this.setState(({ cards }) => ({
       cards: setCardDesc(cardId, newDesc, cards),
     }));
   };
 
-  addCommentInCard = cardId => (commentText) => {
+  handleAddComment = cardId => (commentText) => {
     this.setState(({ cards, comments }, { username }) => {
       const newCommentId = uid();
 
@@ -160,16 +163,16 @@ class Board extends Component {
     });
   };
 
-  updateComment = commentId => (newCommentText) => {
-    this.setState(({ comments }) => ({
-      comments: setCommentText(commentId, newCommentText, comments),
-    }));
-  };
-
-  removeCommentFromCard = cardId => commentId => () => {
+  handleRemoveComment = cardId => commentId => () => {
     this.setState(({ cards, comments }) => ({
       comments: removeComment(commentId, comments),
       cards: removeCommentFromCard(cardId, commentId, cards),
+    }));
+  };
+
+  handleSetCommentText = commentId => (newCommentText) => {
+    this.setState(({ comments }) => ({
+      comments: setCommentText(commentId, newCommentText, comments),
     }));
   };
 
@@ -194,10 +197,10 @@ class Board extends Component {
               key={id}
               cards={listCards}
               title={title}
-              titleUpdate={this.setListTitle(id)}
               onOpenCard={this.openCardModal(id)}
-              onRemoveCard={this.removeCardFromList(id)}
-              onAddNewCard={this.addCardInList(id)}
+              titleUpdate={this.handleSetListTitle(id)}
+              onRemoveCard={this.handleRemoveCard(id)}
+              onAddNewCard={this.handleAddCard(id)}
             />
           );
         })}
@@ -224,12 +227,12 @@ class Board extends Component {
         desc={desc}
         username={username}
         listTitle={listTitle}
-        updateTitle={this.setCardTitle(cardId)}
-        updateDesc={this.updateCardDesc(cardId)}
+        updateTitle={this.handleSetCardTitle(cardId)}
+        updateDesc={this.handleSetCardDesc(cardId)}
         comments={cardComments}
-        onUpdateComment={this.updateComment}
-        onRemoveComment={this.removeCommentFromCard(cardId)}
-        onAddComment={this.addCommentInCard(cardId)}
+        onUpdateComment={this.handleSetCommentText}
+        onRemoveComment={this.handleRemoveComment(cardId)}
+        onAddComment={this.handleAddComment(cardId)}
         onClose={this.closeCardModal}
       />
     );
