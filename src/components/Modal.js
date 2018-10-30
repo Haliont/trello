@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Modal({ children, isResealable = true }) {
+function Modal({ children, isResealable = true, isOpen = false }) {
   return (
-    <div className="modal is-active">
+    <div className={`modal ${isOpen ? 'is-active' : ''}`}>
       <div className="modal-background" />
       <div className="modal-content">
         {children}
