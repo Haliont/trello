@@ -6,14 +6,14 @@ import TextEditor from './TextEditor';
 
 const List = ({
   title,
-  titleUpdate,
+  onSetTitle,
   onAddNewCard,
   cards,
   onRemoveCard,
   onOpenCard,
 }) => (
   <div className="List panel">
-    <TextEditor onTextSave={titleUpdate} value={title} />
+    <TextEditor onTextSave={onSetTitle} value={title} />
     <div className="List-Cards panel-block">
       {cards.map(({ id, title: cardTitle, commentIds }) => (
         <Card
