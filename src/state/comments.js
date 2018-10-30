@@ -12,7 +12,8 @@ comments = [
 * */
 
 const make = (comments = []) => comments;
-const getCard = (id, comments) => comments.find(card => id === card.id);
+const getComment = (id, comments) => comments.find(comment => id === comment.id);
+const getComments = (ids, comments) => comments.filter(comment => ids.includes(comment.id));
 
 const addComment = (
   comment = {
@@ -28,7 +29,8 @@ const removeComment = (commentId, comments) => comments.filter(comment => commen
 
 export {
   make,
-  getCard,
+  getComment,
+  getComments,
   addComment,
   setCommentText,
   removeComment,

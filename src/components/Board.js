@@ -24,7 +24,12 @@ import {
   removeCommentFromCard,
 } from '../state/cards';
 
-import { addComment, setCommentText, removeComment } from '../state/comments';
+import {
+  addComment,
+  setCommentText,
+  removeComment,
+  getComments,
+} from '../state/comments';
 
 const initialLists = [
   {
@@ -193,8 +198,8 @@ class Board extends Component {
         {lists.map(({ id, title, cardIds }) => (
           <List
             key={id}
-            cards={getCards(cardIds, cards)}
             title={title}
+            cards={getCards(cardIds, cards)}
             onOpenCard={this.openCardModal(id)}
             titleUpdate={this.handleSetListTitle(id)}
             onRemoveCard={this.handleRemoveCard(id)}
@@ -206,17 +211,19 @@ class Board extends Component {
   }
 
   renderModal() {
-    const { username } = this.props;
     const {
       cards,
       comments,
       modalData: {
-        title, desc, listTitle, cardId,
+        title,
+        desc,
+        listTitle,
+        cardId,
       },
     } = this.state;
 
-    const { commentIds } = cards.find(({ id }) => id === cardId);
-    const cardComments = comments.filter(({ id }) => commentIds.includes(id));
+    const { username } = this.props;
+    const { commentIds } = getCard(cardId, cards);
 
     return (
       <CardModal
@@ -226,7 +233,7 @@ class Board extends Component {
         listTitle={listTitle}
         updateTitle={this.handleSetCardTitle(cardId)}
         updateDesc={this.handleSetCardDesc(cardId)}
-        comments={cardComments}
+        comments={getComments(commentIds, comments)}
         onUpdateComment={this.handleSetCommentText}
         onRemoveComment={this.handleRemoveComment(cardId)}
         onAddComment={this.handleAddComment(cardId)}
