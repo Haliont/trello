@@ -1,4 +1,3 @@
-import './Signup.css';
 import React from 'react';
 
 function SignupForm({ onSubmit, onChange }) {
