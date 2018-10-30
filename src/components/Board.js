@@ -5,7 +5,6 @@ import CardModal from './CardModal';
 import { uid } from '../helpers';
 
 import {
-  make as makeLists,
   setListTitle,
   addCardInList,
   removeCardFromList,
@@ -13,7 +12,6 @@ import {
 } from '../state-helpers/lists';
 
 import {
-  make as makeCards,
   addCard,
   removeCard,
   setCardTitle,
@@ -56,8 +54,8 @@ const initialLists = [
 
 class Board extends Component {
   state = {
-    lists: makeLists(initialLists),
-    cards: makeCards([]),
+    lists: initialLists,
+    cards: [],
     comments: [],
     modalData: {
       title: '',

@@ -1,16 +1,5 @@
 import { updateItem, uid } from '../helpers';
 
-/*
-lists = [
-  {
-    id: 0,
-    title: 'Title of list',
-    cardIds: [1, 2, 3],
-  }
-]
-* */
-
-const make = (lists = []) => lists;
 const getList = (id, lists) => lists.find(list => id === list.id);
 
 const addList = (
@@ -20,7 +9,7 @@ const addList = (
     cardIds: [],
   },
   lists,
-) => make([...lists, list]);
+) => [...lists, list];
 
 const setListTitle = (listId, title, lists) => updateItem(listId, { title }, lists);
 
@@ -36,7 +25,6 @@ const removeCardFromList = (listId, cardId, lists) => {
 };
 
 export {
-  make,
   getList,
   addList,
   setListTitle,

@@ -1,17 +1,5 @@
 import { updateItem, uid } from '../helpers';
 
-/*
-cards = [
-  {
-    id: 0,
-    title: 'Card title',
-    desc: '',
-    commentIds: [],
-  },
-]
-* */
-
-const make = (cards = []) => cards;
 const getCard = (id, cards = []) => cards.find(card => id === card.id);
 const getCards = (ids = [], cards = []) => cards.filter(card => ids.includes(card.id));
 
@@ -23,7 +11,7 @@ const addCard = (
     commentIds: [],
   },
   cards,
-) => make([...cards, card]);
+) => [...cards, card];
 
 const setCardTitle = (cardId, title, cards) => updateItem(cardId, { title }, cards);
 const setCardDesc = (cardId, desc, cards) => updateItem(cardId, { desc }, cards);
@@ -42,7 +30,6 @@ const removeCommentFromCard = (cardId, commentId, cards) => {
 
 
 export {
-  make,
   getCard,
   getCards,
   addCard,
