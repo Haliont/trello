@@ -200,8 +200,8 @@ class Board extends Component {
             key={id}
             title={title}
             cards={getCards(cardIds, cards)}
+            onSetTitle={this.handleSetListTitle(id)}
             onOpenCard={this.openCardModal(id)}
-            titleUpdate={this.handleSetListTitle(id)}
             onRemoveCard={this.handleRemoveCard(id)}
             onAddNewCard={this.handleAddCard(id)}
           />
