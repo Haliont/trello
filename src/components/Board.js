@@ -61,6 +61,9 @@ class Board extends Component {
     comments: [],
     modalData: {
       title: '',
+      desc: '',
+      listTitle: '',
+      cardId: [],
     },
     isOpenModal: false,
   };
