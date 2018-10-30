@@ -65,7 +65,7 @@ class Board extends Component {
       listTitle: '',
       cardId: [],
     },
-    isOpenModal: false,
+    isCardOpen: false,
   };
 
   componentWillMount() {
@@ -91,7 +91,7 @@ class Board extends Component {
   }
 
   handleCloseCard = () => {
-    this.setState({ isOpenModal: false });
+    this.setState({ isCardOpen: false });
   };
 
   handleOpenCard = listId => cardId => () => {
@@ -107,7 +107,7 @@ class Board extends Component {
           listTitle,
           commentIds,
         },
-        isOpenModal: true,
+        isCardOpen: true,
       };
     });
   };
@@ -246,12 +246,12 @@ class Board extends Component {
   }
 
   render() {
-    const { isOpenModal } = this.state;
+    const { isCardOpen } = this.state;
 
     return (
       <div className="Board">
         {this.renderLists()}
-        {isOpenModal && this.renderModal()}
+        {isCardOpen && this.renderModal()}
       </div>
     );
   }
