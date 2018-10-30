@@ -12,11 +12,11 @@ const CardBody = ({ children }) => (
 );
 
 const CardHeader = ({
-  title, updateTitle, listTitle, username, onClose,
+  title, onSetTitle, listTitle, username, onClose,
 }) => (
   <header className="CardModal-CardHead modal-card-head">
     <div className="CardModal-CardHeadInfo">
-      <TextEditor value={title} onTextSave={updateTitle} />
+      <TextEditor value={title} onTextSave={onSetTitle} />
       <div className="CardModal-CardHeadList">
         <span>На списке: </span>
         <span>{listTitle}</span>
@@ -54,13 +54,13 @@ const CardModal = (props) => {
     desc,
     listTitle,
     username,
-    updateTitle,
+    onSetTitle,
     updateDesc,
     onClose,
     comments,
     onAddComment,
     onRemoveComment,
-    onUpdateComment,
+    onSetCommentText,
   } = props;
 
   return (
@@ -72,7 +72,7 @@ const CardModal = (props) => {
           username={username}
           listTitle={listTitle}
           onClose={onClose}
-          updateTitle={updateTitle}
+          onSetTitle={onSetTitle}
         />
         <CardBody>
           <CardDesc
@@ -82,7 +82,7 @@ const CardModal = (props) => {
           <CardComments
             comments={comments}
             onAddComment={onAddComment}
-            onUpdateComment={onUpdateComment}
+            onSetCommentText={onSetCommentText}
             onRemoveComment={onRemoveComment}
           />
         </CardBody>

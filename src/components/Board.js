@@ -230,16 +230,16 @@ class Board extends Component {
 
     return (
       <CardModal
-        title={title}
         desc={desc}
+        title={title}
+        comments={getComments(commentIds, comments)}
         username={username}
         listTitle={listTitle}
-        updateTitle={this.handleSetCardTitle(cardId)}
-        updateDesc={this.handleSetCardDesc(cardId)}
-        comments={getComments(commentIds, comments)}
-        onUpdateComment={this.handleSetCommentText}
-        onRemoveComment={this.handleRemoveComment(cardId)}
+        onSetDesc={this.handleSetCardDesc(cardId)}
+        onSetTitle={this.handleSetCardTitle(cardId)}
         onAddComment={this.handleAddComment(cardId)}
+        onRemoveComment={this.handleRemoveComment(cardId)}
+        onSetCommentText={this.handleSetCommentText}
         onClose={this.handleCloseCard}
       />
     );
