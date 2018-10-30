@@ -87,14 +87,14 @@ class Board extends Component {
     if (key !== 'Escape') {
       return;
     }
-    this.closeCardModal();
+    this.handleCloseCard();
   }
 
-  closeCardModal = () => {
+  handleCloseCard = () => {
     this.setState({ isOpenModal: false });
   };
 
-  openCardModal = listId => cardId => () => {
+  handleOpenCard = listId => cardId => () => {
     this.setState(({ cards, lists }) => {
       const { desc, title, commentIds } = getCard(cardId, cards);
       const { title: listTitle } = getList(listId, lists);
@@ -204,7 +204,7 @@ class Board extends Component {
             title={title}
             cards={getCards(cardIds, cards)}
             onSetTitle={this.handleSetListTitle(id)}
-            onOpenCard={this.openCardModal(id)}
+            onOpenCard={this.handleOpenCard(id)}
             onRemoveCard={this.handleRemoveCard(id)}
             onAddNewCard={this.handleAddCard(id)}
           />
@@ -240,7 +240,7 @@ class Board extends Component {
         onUpdateComment={this.handleSetCommentText}
         onRemoveComment={this.handleRemoveComment(cardId)}
         onAddComment={this.handleAddComment(cardId)}
-        onClose={this.closeCardModal}
+        onClose={this.handleCloseCard}
       />
     );
   }
