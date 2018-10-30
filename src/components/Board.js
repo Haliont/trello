@@ -19,6 +19,7 @@ import {
   setCardTitle,
   setCardDesc,
   getCard,
+  getCards,
   addCommentInCard,
   removeCommentFromCard,
 } from '../state/cards';
@@ -189,21 +190,17 @@ class Board extends Component {
     const { lists, cards } = this.state;
     return (
       <div className="Board-Lists">
-        {lists.map(({ id, title, cardIds }) => {
-          const listCards = cards.filter(card => cardIds.includes(card.id));
-
-          return (
-            <List
-              key={id}
-              cards={listCards}
-              title={title}
-              onOpenCard={this.openCardModal(id)}
-              titleUpdate={this.handleSetListTitle(id)}
-              onRemoveCard={this.handleRemoveCard(id)}
-              onAddNewCard={this.handleAddCard(id)}
-            />
-          );
-        })}
+        {lists.map(({ id, title, cardIds }) => (
+          <List
+            key={id}
+            cards={getCards(cardIds, cards)}
+            title={title}
+            onOpenCard={this.openCardModal(id)}
+            titleUpdate={this.handleSetListTitle(id)}
+            onRemoveCard={this.handleRemoveCard(id)}
+            onAddNewCard={this.handleAddCard(id)}
+          />
+        ))}
       </div>
     );
   }

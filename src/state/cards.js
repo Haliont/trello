@@ -12,7 +12,8 @@ cards = [
 * */
 
 const make = (cards = []) => cards;
-const getCard = (id, cards) => cards.find(card => id === card.id);
+const getCard = (id, cards = []) => cards.find(card => id === card.id);
+const getCards = (ids = [], cards = []) => cards.filter(card => ids.includes(card.id));
 
 const addCard = (
   card = {
@@ -39,9 +40,11 @@ const removeCommentFromCard = (cardId, commentId, cards) => {
   return updateItem(cardId, { commentIds: filteredCommentIds }, cards);
 };
 
+
 export {
   make,
   getCard,
+  getCards,
   addCard,
   setCardTitle,
   setCardDesc,
