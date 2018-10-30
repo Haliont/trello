@@ -1,9 +1,13 @@
 import React from 'react';
 
-function Modal({ children, isResealable = true, isOpen = false }) {
+function Modal({
+  children, isResealable = true, isOpen = false, bgColor,
+}) {
+  const bgStyle = bgColor ? { backgroundColor: bgColor } : {};
+
   return (
     <div className={`modal ${isOpen ? 'is-active' : ''}`}>
-      <div className="modal-background" />
+      <div className="modal-background" style={bgStyle} />
       <div className="modal-content">
         {children}
       </div>
