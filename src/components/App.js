@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import Modal from './Modal';
 import Board from './Board';
-import Signup from './Signup';
+import SignupForm from './SignupForm';
 
 class App extends Component {
   state = {
@@ -35,10 +36,12 @@ class App extends Component {
     return isRegistered ? (
       <Board username={username} />
     ) : (
-      <Signup
-        textChange={this.handleUserNameChange}
-        onSubmit={this.handleSignup}
-      />
+      <Modal isResealable={false} bgColor="#fff" isOpen>
+        <SignupForm
+          onSubmit={this.handleSignup}
+          onChange={this.handleUserNameChange}
+        />
+      </Modal>
     );
   }
 }
