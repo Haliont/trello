@@ -10,7 +10,7 @@ import {
   addCardInList,
   removeCardFromList,
   getList,
-} from '../state/lists';
+} from '../state-helpers/lists';
 
 import {
   make as makeCards,
@@ -22,14 +22,14 @@ import {
   getCards,
   addCommentInCard,
   removeCommentFromCard,
-} from '../state/cards';
+} from '../state-helpers/cards';
 
 import {
   addComment,
   setCommentText,
   removeComment,
   getComments,
-} from '../state/comments';
+} from '../state-helpers/comments';
 
 const initialLists = [
   {
