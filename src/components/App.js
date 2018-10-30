@@ -13,7 +13,6 @@ class App extends Component {
     if (!username) {
       return;
     }
-
     this.setState({ username, isRegistered: true });
   }
 
@@ -32,8 +31,6 @@ class App extends Component {
   };
 
   render() {
-    const foo = x => x;
-    foo();
     const { isRegistered, username } = this.state;
     return isRegistered ? (
       <Board username={username} />
