@@ -1,9 +1,9 @@
 import './CardModal.css';
 import React from 'react';
+import Modal from './Modal';
 import TextEditor from './TextEditor';
 import CardComments from './CardComments';
 
-const Bg = () => <div className="CardModal-Bg modal-background" />;
 const Card = ({ children }) => (
   <div className="CardModal-Card modal-card">{children}</div>
 );
@@ -64,8 +64,7 @@ const CardModal = (props) => {
   } = props;
 
   return (
-    <div className="CardModal modal">
-      <Bg />
+    <Modal>
       <Card>
         <CardHeader
           title={title}
@@ -87,7 +86,7 @@ const CardModal = (props) => {
           />
         </CardBody>
       </Card>
-    </div>
+    </Modal>
   );
 };
 
