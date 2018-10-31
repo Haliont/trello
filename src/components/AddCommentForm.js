@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Form from './Form';
 
 class AddCommentForm extends Component {
   state = { value: '' };
@@ -21,10 +22,12 @@ class AddCommentForm extends Component {
   render() {
     const { value } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <textarea onChange={this.valueChange} value={value} />
-        <button type="submit">Добавить комментарий</button>
-      </form>
+      <Form
+        btnText="Добавить комментарий"
+        value={value}
+        onChange={this.valueChange}
+        onSubmit={this.handleSubmit}
+      />
     );
   }
 }
