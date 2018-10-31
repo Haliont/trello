@@ -10,6 +10,10 @@
   flex-direction: column;
 }
 
+.TextEditor-Form--Column .TextEditor-FormSubmit {
+  margin-top: 10px;
+}
+
 .TextEditor-FormField {
   flex-grow: 1;
 }

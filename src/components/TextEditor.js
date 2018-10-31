@@ -52,17 +52,19 @@ function Form({
   return (
     <form onSubmit={onSubmit} className={formClassName}>
       <div className="TextEditor-FormField field is-marginless">
-        <div className="control ">
+        <div className="control">
           {getEditor(editorType, { value, onChange })}
         </div>
       </div>
-      <button type="submit">
-        {btnText || (
-          <span className="icon has-text-success">
-            <i className="fas fa-check-square" />
-          </span>
-        )}
-      </button>
+      <div className="TextEditor-FormSubmit control">
+        <button type="submit" className="button">
+          {btnText || (
+            <span className="icon has-text-success">
+              <i className="fas fa-check-square" />
+            </span>
+          )}
+        </button>
+      </div>
     </form>
   );
 }
