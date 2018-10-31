@@ -195,18 +195,20 @@ class Board extends Component {
   renderLists() {
     const { lists, cards } = this.state;
     return (
-      <div className="Board-Lists">
-        {lists.map(({ id, title, cardIds }) => (
-          <List
-            key={id}
-            title={title}
-            cards={getCards(cardIds, cards)}
-            onSetTitle={this.handleSetListTitle(id)}
-            onOpenCard={this.handleOpenCard(id)}
-            onRemoveCard={this.handleRemoveCard(id)}
-            onAddNewCard={this.handleAddCard(id)}
-          />
-        ))}
+      <div className="Board-ListsWrapper">
+        <div className="Board-Lists">
+          {lists.map(({ id, title, cardIds }) => (
+            <List
+              key={id}
+              title={title}
+              cards={getCards(cardIds, cards)}
+              onSetTitle={this.handleSetListTitle(id)}
+              onOpenCard={this.handleOpenCard(id)}
+              onRemoveCard={this.handleRemoveCard(id)}
+              onAddNewCard={this.handleAddCard(id)}
+            />
+          ))}
+        </div>
       </div>
     );
   }
