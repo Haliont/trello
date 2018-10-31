@@ -1,0 +1,15 @@
+.TextEditor-Form {
+  display: flex;
+}
+
+.TextEditor-Form--Row {
+  flex-direction: row;
+}
+
+.TextEditor-Form--Column {
+  flex-direction: column;
+}
+
+.TextEditor-FormField {
+  flex-grow: 1;
+}
