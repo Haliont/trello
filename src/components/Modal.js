@@ -1,25 +1,49 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-function Modal({
-  children, isResealable = true, isOpen = false, bgColor,
-}) {
-  const bgStyle = bgColor ? { backgroundColor: bgColor } : {};
+class Modal extends Component {
+  componentWillMount() {
+    window.addEventListener('keyup', this.handleKeyUp);
+  }
 
-  return (
-    <div className={`modal ${isOpen ? 'is-active' : ''}`}>
-      <div className="modal-background" style={bgStyle} />
-      <div className="modal-content">
-        {children}
+  componentWillUnmount() {
+    window.removeEventListener('keyup', this.handleKeyUp);
+  }
+
+  handleKeyUp = ({ key }) => {
+    if (key !== 'Escape') {
+      return;
+    }
+    const { onClose } = this.props;
+    onClose();
+  };
+
+  render() {
+    const {
+      children,
+      isResealable = true,
+      isOpen = false,
+      onClose,
+      bgColor,
+    } = this.props;
+
+    const bgStyle = bgColor ? { backgroundColor: bgColor } : {};
+
+    return (
+      <div className={`modal ${isOpen ? 'is-active' : ''}`}>
+        <div className="modal-background" style={bgStyle} />
+        <div className="modal-content">
+          {children}
+        </div>
+        {isResealable && (
+          <button
+            className="modal-close is-large"
+            aria-label="close"
+            type="button"
+            onClick={onClose}
+          />)}
       </div>
-      {isResealable && (
-        <button
-          className="modal-close is-large"
-          aria-label="close"
-          type="button"
-        />)}
-    </div>
-
-  );
+    );
+  }
 }
 
 export default Modal;
