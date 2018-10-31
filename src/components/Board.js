@@ -1,7 +1,8 @@
 import './Board.css';
 import React, { Component } from 'react';
 import List from './List';
-import CardModal from './CardModal';
+import Modal from './Modal';
+import ModalCard from './ModalCard';
 import { uid } from '../helpers';
 
 import {
@@ -229,19 +230,20 @@ class Board extends Component {
     const { commentIds } = getCard(cardId, cards);
 
     return (
-      <CardModal
-        desc={desc}
-        title={title}
-        comments={getComments(commentIds, comments)}
-        username={username}
-        listTitle={listTitle}
-        onSetDesc={this.handleSetCardDesc(cardId)}
-        onSetTitle={this.handleSetCardTitle(cardId)}
-        onAddComment={this.handleAddComment(cardId)}
-        onRemoveComment={this.handleRemoveComment(cardId)}
-        onSetCommentText={this.handleSetCommentText}
-        onClose={this.handleCloseCard}
-      />
+      <Modal isOpen onClose={this.handleCloseCard}>
+        <ModalCard
+          desc={desc}
+          title={title}
+          comments={getComments(commentIds, comments)}
+          username={username}
+          listTitle={listTitle}
+          onSetDesc={this.handleSetCardDesc(cardId)}
+          onSetTitle={this.handleSetCardTitle(cardId)}
+          onAddComment={this.handleAddComment(cardId)}
+          onRemoveComment={this.handleRemoveComment(cardId)}
+          onSetCommentText={this.handleSetCommentText}
+        />
+      </Modal>
     );
   }
 
