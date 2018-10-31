@@ -17,7 +17,13 @@ function List(props) {
   return (
     <div className="List">
       <div className="List-Content panel">
-        <TextEditor onTextSave={onSetTitle} value={title} />
+        <TextEditor
+          value={title}
+          onTextSave={onSetTitle}
+          editorType="input"
+          formDirection="row"
+          viewClassName="panel-heading"
+        />
         <div className="List-Cards panel-block">
           {cards.map(({ id, title: cardTitle, commentIds }) => (
             <Card
