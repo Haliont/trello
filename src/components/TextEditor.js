@@ -1,33 +1,76 @@
+import './TextEditor.css';
 import React, { Component } from 'react';
 
-const View = ({ value, hint, toggleEditing }) => (
-  <button
-    type="button"
-    title={hint}
-    className="btn-reset"
-    onClick={toggleEditing}
-  >
-    <p>{value}</p>
-  </button>
-);
+const getEditor = (type, props) => {
+  switch (type) {
+    case 'input':
+      return (
+        <input
+          className="input"
+          {...props}
+        />
+      );
 
-const Editor = ({ value, onChange, btnText }) => (
-  <>
-    <textarea className="textarea" value={value} onChange={onChange} />
-    <button type="submit">
-      {btnText || (
-        <span className="icon has-text-success">
-          <i className="fas fa-check-square" />
-        </span>
-      )}
-    </button>
-  </>
-);
+    case 'textarea':
+    default:
+      return (
+        <textarea
+          className="textarea"
+          {...props}
+        />
+      );
+  }
+};
+
+function View({
+  className, value, hint, toggleEditing,
+}) {
+  return (
+    <p
+      onClick={toggleEditing}
+      title={hint}
+      className={className}
+    >
+      {value}
+    </p>
+  );
+}
+
+function Form({
+  value,
+  onChange,
+  onSubmit,
+  btnText,
+  editorType,
+  formDirection,
+}) {
+  const formClassName = [
+    'TextEditor-Form',
+    `TextEditor-Form--${formDirection === 'row' ? 'Row' : 'Column'}`,
+  ].join(' ');
+
+  return (
+    <form onSubmit={onSubmit} className={formClassName}>
+      <div className="TextEditor-FormField field is-marginless">
+        <div className="control ">
+          {getEditor(editorType, { value, onChange })}
+        </div>
+      </div>
+      <button type="submit">
+        {btnText || (
+          <span className="icon has-text-success">
+            <i className="fas fa-check-square" />
+          </span>
+        )}
+      </button>
+    </form>
+  );
+}
 
 class TextEditor extends Component {
   static View = View;
 
-  static Editor = Editor;
+  static Form = Form;
 
   static defaultProps = {
     hint: 'Изменить текст',
@@ -63,25 +106,28 @@ class TextEditor extends Component {
 
   render() {
     const { value, isEditing } = this.state;
-    const { btnText, hint } = this.props;
+    const {
+      btnText, hint, viewClassName, editorType, formDirection,
+    } = this.props;
 
-    return (
-      <form className="form" onSubmit={this.handleSubmitForm}>
-        {isEditing ? (
-          <TextEditor.Editor
-            value={value}
-            btnText={btnText}
-            onChange={this.valueChange}
-          />
-        ) : (
-          <TextEditor.View
-            value={value}
-            hint={hint}
-            toggleEditing={this.toggleEditing}
-          />
-        )}
-      </form>
-    );
+    return isEditing
+      ? (
+        <TextEditor.Form
+          value={value}
+          btnText={btnText}
+          editorType={editorType}
+          formDirection={formDirection}
+          onChange={this.valueChange}
+          onSubmit={this.handleSubmitForm}
+        />
+      ) : (
+        <TextEditor.View
+          hint={hint}
+          value={value}
+          className={viewClassName}
+          toggleEditing={this.toggleEditing}
+        />
+      );
   }
 }
 
