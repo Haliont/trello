@@ -10,3 +10,15 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+.flex {
+  display: flex;
+}
+
+.fg-1 {
+  flex-grow: 1;
+}
+
+.mb {
+  margin-bottom: 0.75rem;
+}
