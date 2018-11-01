@@ -70,24 +70,12 @@ class Board extends Component {
 
   componentWillMount() {
     this.fetchData();
-    window.addEventListener('keyup', this.handleKeyUp);
   }
 
   componentDidUpdate() {
     const { lists, cards, comments } = this.state;
     const boardData = JSON.stringify({ lists, cards, comments });
     localStorage.boardData = boardData;
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('keyup', this.handleKeyUp);
-  }
-
-  handleKeyUp = ({ key }) => {
-    if (key !== 'Escape') {
-      return;
-    }
-    this.handleCloseCard();
   }
 
   handleCloseCard = () => {
