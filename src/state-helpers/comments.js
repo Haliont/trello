@@ -14,11 +14,14 @@ const addComment = (
 
 const setCommentText = (commentId, text, comments) => updateItem(commentId, { text }, comments);
 const removeComment = (commentId, comments) => comments.filter(comment => commentId !== comment.id);
+const removeComments = (commentIds, comments) => comments
+  .filter(comment => !commentIds.includes(comment.id));
 
 export {
   getComment,
   getComments,
   addComment,
+  removeComments,
   setCommentText,
   removeComment,
 };
