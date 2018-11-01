@@ -35,7 +35,7 @@ function ModalCardHeader({
             ['На списке:', listTitle],
             ['Автор карточки:', username],
           ].map(([key, value]) => (
-            <p className="is-size-7">
+            <p key={value} className="is-size-7">
               <span>
                 {key}
                 {' '}
@@ -61,7 +61,7 @@ function ModalCardComments({
             ? 'Комментариев нет'
             : comments.map(({ id, text, author }) => (
               <Comment
-                kye={id}
+                key={id}
                 text={text}
                 author={author}
                 onUpdateComment={onUpdateComment(id)}
