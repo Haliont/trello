@@ -27,6 +27,7 @@ import {
   addComment,
   setCommentText,
   removeComment,
+  removeComments,
   getComments,
 } from '../state-helpers/comments';
 
@@ -136,10 +137,14 @@ class Board extends Component {
   handleRemoveCard = listId => cardId => (event) => {
     event.stopPropagation();
 
-    this.setState(({ lists, cards }) => ({
-      lists: removeCardFromList(listId, cardId, lists),
-      cards: removeCard(cardId, cards),
-    }));
+    this.setState(({ lists, cards, comments }) => {
+      const { commentIds } = getCard(cardId, cards);
+      return {
+        comments: removeComments(commentIds, comments),
+        lists: removeCardFromList(listId, cardId, lists),
+        cards: removeCard(cardId, cards),
+      };
+    });
   };
 
   handleSetCardTitle = cardId => (newTitle) => {
