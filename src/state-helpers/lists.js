@@ -1,6 +1,6 @@
-import { updateItem, uid } from '../helpers';
+import { uid } from '../helpers';
 
-const getList = (id, lists) => lists.find(list => id === list.id);
+const getList = (id, lists) => lists[id];
 
 const addList = (
   list = {
@@ -9,25 +9,16 @@ const addList = (
     cardIds: [],
   },
   lists,
-) => [...lists, list];
+) => ({ ...lists, [list.id]: list });
 
-const setListTitle = (listId, title, lists) => updateItem(listId, { title }, lists);
-
-const addCardInList = (listId, cardId, lists) => {
-  const { cardIds } = getList(listId, lists);
-  return updateItem(listId, { cardIds: [...cardIds, cardId] }, lists);
-};
-
-const removeCardFromList = (listId, cardId, lists) => {
-  const { cardIds } = getList(listId, lists);
-  const filteredCardIds = cardIds.filter(id => id !== cardId);
-  return updateItem(listId, { cardIds: filteredCardIds }, lists);
+const setListTitle = (listId, title, lists) => {
+  const list = lists[listId];
+  const updatedList = { ...list, title };
+  return { ...lists, [listId]: updatedList };
 };
 
 export {
   getList,
   addList,
   setListTitle,
-  addCardInList,
-  removeCardFromList,
 };

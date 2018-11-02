@@ -4,10 +4,13 @@ import Card from './Card';
 import AddCardForm from './AddCardForm';
 import TextEditor from './TextEditor';
 
+import { getCommentsByCardId } from '../state-helpers/comments';
+
 function List(props) {
   const {
     title,
     cards,
+    comments,
     onSetTitle,
     onOpenCard,
     onAddNewCard,
@@ -25,13 +28,13 @@ function List(props) {
           viewClassName="panel-heading"
         />
         <div className="List-Cards panel-block">
-          {cards.map(({ id, title: cardTitle, commentIds }) => (
+          {cards.map(({ id, title: cardTitle }) => (
             <Card
               key={id}
               title={cardTitle}
               onOpen={onOpenCard(id)}
               onRemove={onRemoveCard(id)}
-              commentsCount={commentIds.length}
+              commentsCount={getCommentsByCardId(id, comments).length}
             />
           ))}
         </div>

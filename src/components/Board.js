@@ -7,8 +7,6 @@ import { uid } from '../helpers';
 
 import {
   setListTitle,
-  addCardInList,
-  removeCardFromList,
   getList,
 } from '../state-helpers/lists';
 
@@ -18,53 +16,42 @@ import {
   setCardTitle,
   setCardDesc,
   getCard,
-  getCards,
-  addCommentInCard,
-  removeCommentFromCard,
+  getCardsByListId,
 } from '../state-helpers/cards';
 
 import {
   addComment,
   setCommentText,
   removeComment,
-  removeComments,
-  getComments,
+  removeCommentsByCardId,
+  getCommentsByCardId,
 } from '../state-helpers/comments';
 
-const initialLists = [
-  {
+const initialLists = {
+  0: {
     id: 0,
     title: 'TODO',
-    cardIds: [],
   },
-  {
+  1: {
     id: 1,
     title: 'In Progress',
-    cardIds: [],
   },
-  {
+  2: {
     id: 2,
     title: 'Testing',
-    cardIds: [],
   },
-  {
+  3: {
     id: 3,
     title: 'Done',
-    cardIds: [],
   },
-];
+};
 
 class Board extends Component {
   state = {
     lists: initialLists,
-    cards: [],
-    comments: [],
-    modalData: {
-      title: '',
-      desc: '',
-      listTitle: '',
-      cardId: [],
-    },
+    cards: {},
+    comments: {},
+    activeCardId: null,
     isCardOpen: false,
   };
 
@@ -79,25 +66,11 @@ class Board extends Component {
   }
 
   handleCloseCard = () => {
-    this.setState({ isCardOpen: false });
+    this.setState({ isCardOpen: false, activeCardId: null });
   };
 
-  handleOpenCard = listId => cardId => () => {
-    this.setState(({ cards, lists }) => {
-      const { desc, title, commentIds } = getCard(cardId, cards);
-      const { title: listTitle } = getList(listId, lists);
-
-      return {
-        modalData: {
-          desc,
-          title,
-          cardId,
-          listTitle,
-          commentIds,
-        },
-        isCardOpen: true,
-      };
-    });
+  handleOpenCard = cardId => () => {
+    this.setState({ activeCardId: cardId, isCardOpen: true });
   };
 
   handleSetListTitle = listId => (newTitle) => {
@@ -107,29 +80,28 @@ class Board extends Component {
   };
 
   handleAddCard = listId => (newCardTitle) => {
-    const newCardId = uid();
+    const { username } = this.props;
 
     const newCard = {
-      id: newCardId,
+      id: uid(),
       title: newCardTitle,
+      author: username,
       desc: '',
-      commentIds: [],
+      listId,
     };
 
-    this.setState(({ lists, cards }) => ({
-      lists: addCardInList(listId, newCardId, lists),
+    this.setState(({ cards }) => ({
       cards: addCard(newCard, cards),
     }));
   };
 
-  handleRemoveCard = listId => cardId => (event) => {
+  handleRemoveCard = cardId => (event) => {
     event.stopPropagation();
 
-    this.setState(({ lists, cards, comments }) => {
-      const { commentIds } = getCard(cardId, cards);
+    this.setState(({ cards, comments }) => {
+      const newComments = removeCommentsByCardId(cardId, comments);
       return {
-        comments: removeComments(commentIds, comments),
-        lists: removeCardFromList(listId, cardId, lists),
+        comments: newComments,
         cards: removeCard(cardId, cards),
       };
     });
@@ -148,26 +120,23 @@ class Board extends Component {
   };
 
   handleAddComment = cardId => (commentText) => {
-    this.setState(({ cards, comments }, { username }) => {
-      const newCommentId = uid();
+    const { username } = this.props;
 
-      const newComment = {
-        id: newCommentId,
-        text: commentText,
-        author: username,
-      };
+    const newComment = {
+      id: uid(),
+      text: commentText,
+      author: username,
+      cardId,
+    };
 
-      return {
-        comments: addComment(newComment, comments),
-        cards: addCommentInCard(cardId, newCommentId, cards),
-      };
-    });
+    this.setState(({ comments }) => ({
+      comments: addComment(newComment, comments),
+    }));
   };
 
-  handleRemoveComment = cardId => commentId => () => {
-    this.setState(({ cards, comments }) => ({
+  handleRemoveComment = commentId => () => {
+    this.setState(({ comments }) => ({
       comments: removeComment(commentId, comments),
-      cards: removeCommentFromCard(cardId, commentId, cards),
     }));
   };
 
@@ -187,18 +156,19 @@ class Board extends Component {
   }
 
   renderLists() {
-    const { lists, cards } = this.state;
+    const { lists, cards, comments } = this.state;
     return (
       <div className="Board-ListsWrapper">
         <div className="Board-Lists">
-          {lists.map(({ id, title, cardIds }) => (
+          {Object.values(lists).map(({ id, title }) => (
             <List
               key={id}
               title={title}
-              cards={getCards(cardIds, cards)}
+              cards={getCardsByListId(id, cards)}
+              comments={comments}
               onSetTitle={this.handleSetListTitle(id)}
-              onOpenCard={this.handleOpenCard(id)}
-              onRemoveCard={this.handleRemoveCard(id)}
+              onOpenCard={this.handleOpenCard}
+              onRemoveCard={this.handleRemoveCard}
               onAddNewCard={this.handleAddCard(id)}
             />
           ))}
@@ -209,31 +179,28 @@ class Board extends Component {
 
   renderModal() {
     const {
-      cards,
-      comments,
-      modalData: {
-        title,
-        desc,
-        listTitle,
-        cardId,
-      },
+      cards, lists, comments, activeCardId,
     } = this.state;
 
-    const { username } = this.props;
-    const { commentIds } = getCard(cardId, cards);
+    const {
+      title, desc, author, listId,
+    } = getCard(activeCardId, cards);
+
+    const { title: listTitle } = getList(listId, lists);
+    const cardComments = getCommentsByCardId(activeCardId, comments);
 
     return (
       <Modal isOpen onClose={this.handleCloseCard}>
         <ModalCard
           desc={desc}
           title={title}
-          comments={getComments(commentIds, comments)}
-          username={username}
+          comments={cardComments}
+          author={author}
           listTitle={listTitle}
-          onSetDesc={this.handleSetCardDesc(cardId)}
-          onSetTitle={this.handleSetCardTitle(cardId)}
-          onAddComment={this.handleAddComment(cardId)}
-          onRemoveComment={this.handleRemoveComment(cardId)}
+          onSetDesc={this.handleSetCardDesc(activeCardId)}
+          onSetTitle={this.handleSetCardTitle(activeCardId)}
+          onAddComment={this.handleAddComment(activeCardId)}
+          onRemoveComment={this.handleRemoveComment}
           onSetCommentText={this.handleSetCommentText}
         />
       </Modal>

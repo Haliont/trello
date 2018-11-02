@@ -1,41 +1,39 @@
-import { updateItem, uid } from '../helpers';
+import _ from 'lodash';
+import { uid } from '../helpers';
 
-const getCard = (id, cards = []) => cards.find(card => id === card.id);
-const getCards = (ids = [], cards = []) => cards.filter(card => ids.includes(card.id));
+const getCard = (id, cards) => cards[id];
+const getCardsByListId = (listId, cards) => Object
+  .values(_.pickBy(cards, card => card.listId === listId));
 
 const addCard = (
   card = {
     id: uid(),
     title: 'Card title',
     desc: '',
-    commentIds: [],
+    author: '',
   },
   cards,
-) => [...cards, card];
+) => ({ ...cards, [card.id]: card });
 
-const setCardTitle = (cardId, title, cards) => updateItem(cardId, { title }, cards);
-const setCardDesc = (cardId, desc, cards) => updateItem(cardId, { desc }, cards);
-const removeCard = (cardId, cards) => cards.filter(card => cardId !== card.id);
-
-const addCommentInCard = (cardId, commentId, cards) => {
-  const { commentIds } = getCard(cardId, cards);
-  return updateItem(cardId, { commentIds: [...commentIds, commentId] }, cards);
+const setCardTitle = (cardId, title, cards) => {
+  const card = cards[cardId];
+  const updatedCard = { ...card, title };
+  return { ...cards, [cardId]: updatedCard };
 };
 
-const removeCommentFromCard = (cardId, commentId, cards) => {
-  const { commentIds } = getCard(cardId, cards);
-  const filteredCommentIds = commentIds.filter(id => id !== commentId);
-  return updateItem(cardId, { commentIds: filteredCommentIds }, cards);
+const setCardDesc = (cardId, desc, cards) => {
+  const card = cards[cardId];
+  const updatedCard = { ...card, desc };
+  return { ...cards, [cardId]: updatedCard };
 };
 
+const removeCard = (cardId, cards) => _.omit(cards, cardId);
 
 export {
   getCard,
-  getCards,
   addCard,
-  setCardTitle,
-  setCardDesc,
   removeCard,
-  addCommentInCard,
-  removeCommentFromCard,
+  setCardDesc,
+  setCardTitle,
+  getCardsByListId,
 };

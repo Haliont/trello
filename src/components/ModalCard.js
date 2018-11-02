@@ -18,7 +18,7 @@ function ModalCardDesc({ desc, onSetDesc }) {
 }
 
 function ModalCardHeader({
-  title, listTitle, onSetTitle, username,
+  title, listTitle, onSetTitle, author,
 }) {
   return (
     <header className="modal-card-head flex">
@@ -33,7 +33,7 @@ function ModalCardHeader({
         {
           [
             ['На списке:', listTitle],
-            ['Автор карточки:', username],
+            ['Автор карточки:', author],
           ].map(([key, value]) => (
             <p key={value} className="is-size-7">
               <span>
@@ -82,7 +82,7 @@ function ModalCard({
   title,
   listTitle,
   desc,
-  username,
+  author,
   onSetDesc,
   onSetTitle,
   comments,
@@ -94,7 +94,7 @@ function ModalCard({
     <div className="modal-card">
       <ModalCardHeader
         title={title}
-        username={username}
+        author={author}
         listTitle={listTitle}
         onSetTitle={onSetTitle}
       />

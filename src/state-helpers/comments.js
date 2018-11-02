@@ -1,7 +1,9 @@
-import { updateItem, uid } from '../helpers';
+import _ from 'lodash';
+import { uid } from '../helpers';
 
-const getComment = (id, comments) => comments.find(comment => id === comment.id);
-const getComments = (ids, comments) => comments.filter(comment => ids.includes(comment.id));
+const getComment = (id, comments) => comments[id];
+const getCommentsByCardId = (cardId, comments) => Object
+  .values(_.pickBy(comments, comment => comment.cardId === cardId));
 
 const addComment = (
   comment = {
@@ -10,18 +12,23 @@ const addComment = (
     author: 'Anonim',
   },
   comments,
-) => [...comments, comment];
+) => ({ ...comments, [comment.id]: comment });
 
-const setCommentText = (commentId, text, comments) => updateItem(commentId, { text }, comments);
-const removeComment = (commentId, comments) => comments.filter(comment => commentId !== comment.id);
-const removeComments = (commentIds, comments) => comments
-  .filter(comment => !commentIds.includes(comment.id));
+const setCommentText = (commentId, text, comments) => {
+  const comment = comments[commentId];
+  const updatedComment = { ...comment, text };
+  return { ...comments, [commentId]: updatedComment };
+};
+
+const removeComment = (commentId, comments) => _.omit(comments, commentId);
+const removeCommentsByCardId = (cardId, comments) => _
+  .omitBy(comments, comment => comment.cardId === cardId);
 
 export {
   getComment,
-  getComments,
+  getCommentsByCardId,
   addComment,
-  removeComments,
+  removeCommentsByCardId,
   setCommentText,
   removeComment,
 };
