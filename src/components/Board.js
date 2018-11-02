@@ -1,6 +1,6 @@
 import './Board.css';
 import React, { Component } from 'react';
-import List from './List';
+import CardList from './CardList';
 import Modal from './Modal';
 import ModalCard from './ModalCard';
 import { uid } from '../helpers';
@@ -161,7 +161,7 @@ class Board extends Component {
       <div className="Board-ListsWrapper">
         <div className="Board-Lists">
           {Object.values(lists).map(({ id, title }) => (
-            <List
+            <CardList
               key={id}
               title={title}
               cards={getCardsByListId(id, cards)}

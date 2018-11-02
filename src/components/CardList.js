@@ -1,4 +1,4 @@
-import './List.css';
+import './CardList.css';
 import React from 'react';
 import Card from './Card';
 import AddCardForm from './AddCardForm';
@@ -6,7 +6,7 @@ import TextEditor from './TextEditor';
 
 import { getCommentsByCardId } from '../state-helpers/comments';
 
-function List(props) {
+function CardList(props) {
   const {
     title,
     cards,
@@ -18,8 +18,8 @@ function List(props) {
   } = props;
 
   return (
-    <div className="List">
-      <div className="List-Content panel">
+    <div className="CardList">
+      <div className="CardList-Content panel">
         <TextEditor
           value={title}
           onTextSave={onSetTitle}
@@ -27,7 +27,7 @@ function List(props) {
           formDirection="row"
           viewClassName="panel-heading"
         />
-        <div className="List-Cards panel-block">
+        <div className="CardList-Cards panel-block">
           {cards.map(({ id, title: cardTitle }) => (
             <Card
               key={id}
@@ -38,7 +38,7 @@ function List(props) {
             />
           ))}
         </div>
-        <div className="List-Footer panel-block">
+        <div className="CardList-Footer panel-block">
           <AddCardForm onAddNewCard={onAddNewCard} />
         </div>
       </div>
@@ -46,4 +46,4 @@ function List(props) {
   );
 }
 
-export default List;
+export default CardList;

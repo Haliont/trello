@@ -1,4 +1,4 @@
-.List {
+.CardList {
   display: inline-block;
   vertical-align: top;
   margin-right: 10px;
@@ -6,32 +6,32 @@
   height: 100%;
 }
 
-.List:last-child {
+.CardList:last-child {
   margin-right: 0;
 }
 
-.List-Content {
+.CardList-Content {
   max-height: 100%;
   display: flex;
   flex-direction: column;
 }
 
-.List-Content.panel {
+.CardList-Content.panel {
   margin-bottom: 0;
 }
 
-.List-EditTitleBtn {
+.CardList-EditTitleBtn {
   width: 100%;
   text-align: left;
   cursor: text;
 }
 
-.List-Cards {
+.CardList-Cards {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
 }
 
-.List-Footer {
+.CardList-Footer {
   flex: none;
 }
