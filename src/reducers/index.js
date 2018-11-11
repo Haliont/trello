@@ -8,4 +8,13 @@ const username = handleActions({
   },
 }, '');
 
-export default combineReducers({ username });
+const lists = handleActions({
+  [actions.setListTitle](state, { payload: { id, title } }) {
+    return { ...state, [id]: { ...state[id], title } };
+  },
+}, {});
+
+export default combineReducers({
+  lists,
+  username,
+});

@@ -1,20 +1,20 @@
 import './CardList.css';
 import React from 'react';
-import Card from './Card';
+// import Card from './Card';
 import AddCardForm from './AddCardForm';
 import TextEditor from './TextEditor';
 
-import { getCommentsByCardId } from '../state-helpers/comments';
+// import { getCommentsByCardId } from '../state-helpers/comments';
 
 function CardList(props) {
   const {
     title,
-    cards,
-    comments,
+    // cards,
+    // comments,
     onSetTitle,
-    onOpenCard,
+    // onOpenCard,
     onAddNewCard,
-    onRemoveCard,
+    // onRemoveCard,
   } = props;
 
   return (
@@ -27,7 +27,7 @@ function CardList(props) {
           formDirection="row"
           viewClassName="panel-heading"
         />
-        <div className="CardList-Cards panel-block">
+        {/* <div className="CardList-Cards panel-block">
           {cards.map(({ id, title: cardTitle }) => (
             <Card
               key={id}
@@ -37,7 +37,7 @@ function CardList(props) {
               commentsCount={getCommentsByCardId(id, comments).length}
             />
           ))}
-        </div>
+        </div> */}
         <div className="CardList-Footer panel-block">
           <AddCardForm onAddNewCard={onAddNewCard} />
         </div>
