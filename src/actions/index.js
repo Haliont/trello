@@ -2,3 +2,7 @@ import { createAction } from 'redux-actions';
 
 export const updateUsername = createAction('UPDATE_USERNAME');
 export const signup = createAction('SIGNUP');
+
+export const openCard = createAction('OPEN_CARD');
+export const closeCard = createAction('CLOSE_CARD');
+export const setListTitle = createAction('SET_LIST_TITLE');
