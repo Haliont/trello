@@ -1,40 +1,28 @@
 import './Board.css';
 import React, { Component } from 'react';
 import CardList from './CardList';
-// import Modal from './Modal';
-// import ModalCard from './ModalCard';
-import { uid } from '../helpers';
+import Modal from './Modal';
+import ModalCard from '../containers/ModalCard';
 
-import {
-  // addCard,
-  // removeCard,
-  setCardTitle,
-  setCardDesc,
-  // getCard,
-  getCardsByListId,
-} from '../state-helpers/cards';
-
-import {
-  addComment,
-  setCommentText,
-  removeComment,
-  // removeCommentsByCardId,
-  // getCommentsByCardId,
-} from '../state-helpers/comments';
+import { getCardsByListId } from '../state-helpers/cards';
 
 import {
   setListTitle,
   addCard,
   removeCard,
+  openCard,
+  closeCard,
 } from '../actions';
 
 class Board extends Component {
   handleCloseCard = () => {
-    // this.setState({ isCardOpen: false, activeCardId: null });
+    const { dispatch } = this.props;
+    dispatch(closeCard());
   };
 
-  handleOpenCard = () => () => {
-    // this.setState({ activeCardId: cardId, isCardOpen: true });
+  handleOpenCard = cardId => () => {
+    const { dispatch } = this.props;
+    dispatch(openCard(cardId));
   };
 
   handleSetListTitle = listId => (newTitle) => {
@@ -64,45 +52,6 @@ class Board extends Component {
     dispatch(removeCard(cardId));
   };
 
-  handleSetCardTitle = cardId => (newTitle) => {
-    this.setState(({ cards }) => ({
-      cards: setCardTitle(cardId, newTitle, cards),
-    }));
-  };
-
-  handleSetCardDesc = cardId => (newDesc) => {
-    this.setState(({ cards }) => ({
-      cards: setCardDesc(cardId, newDesc, cards),
-    }));
-  };
-
-  handleAddComment = cardId => (commentText) => {
-    const { username } = this.props;
-
-    const newComment = {
-      id: uid(),
-      text: commentText,
-      author: username,
-      cardId,
-    };
-
-    this.setState(({ comments }) => ({
-      comments: addComment(newComment, comments),
-    }));
-  };
-
-  handleRemoveComment = commentId => () => {
-    this.setState(({ comments }) => ({
-      comments: removeComment(commentId, comments),
-    }));
-  };
-
-  handleSetCommentText = commentId => (newCommentText) => {
-    this.setState(({ comments }) => ({
-      comments: setCommentText(commentId, newCommentText, comments),
-    }));
-  };
-
   renderLists() {
     const { lists, cards, comments } = this.props;
     return (
@@ -115,7 +64,7 @@ class Board extends Component {
               cards={getCardsByListId(id, cards)}
               comments={comments}
               onSetTitle={this.handleSetListTitle(id)}
-              // onOpenCard={this.handleOpenCard}
+              onOpenCard={this.handleOpenCard}
               onRemoveCard={this.handleRemoveCard}
               onAddNewCard={this.handleAddCard(id)}
             />
@@ -125,41 +74,16 @@ class Board extends Component {
     );
   }
 
-  // renderModal() {
-  //   const {
-  //     cards, lists, comments, activeCardId,
-  //   } = this.state;
-
-  //   const {
-  //     title, desc, author, listId,
-  //   } = getCard(activeCardId, cards);
-
-  //   const { title: listTitle } = getList(listId, lists);
-  //   const cardComments = getCommentsByCardId(activeCardId, comments);
-
-  // //   return (
-  // //     <Modal isOpen onClose={this.handleCloseCard}>
-  // //       <ModalCard
-  // //         desc={desc}
-  // //         title={title}
-  // //         comments={cardComments}
-  // //         author={author}
-  // //         listTitle={listTitle}
-  // //         onSetDesc={this.handleSetCardDesc(activeCardId)}
-  // //         onSetTitle={this.handleSetCardTitle(activeCardId)}
-  // //         onAddComment={this.handleAddComment(activeCardId)}
-  // //         onRemoveComment={this.handleRemoveComment}
-  // //         onSetCommentText={this.handleSetCommentText}
-  // //       />
-  // //     </Modal>
-  // //   );
-  // // }
-
   render() {
+    const { activeCardId } = this.props;
     return (
       <div className="Board">
         {this.renderLists()}
-        {/* {isCardOpen && this.renderModal()} */}
+        {activeCardId && (
+          <Modal isOpen onClose={this.handleCloseCard}>
+            <ModalCard />
+          </Modal>
+        )}
       </div>
     );
   }

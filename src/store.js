@@ -22,10 +22,12 @@ const initialLists = {
 
 const cardsJSON = localStorage.cards || JSON.stringify({});
 const listsJSON = localStorage.lists || JSON.stringify(initialLists);
+const commentsJSON = localStorage.comments || JSON.stringify({});
 
 const preloadState = {
   cards: JSON.parse(cardsJSON),
   lists: JSON.parse(listsJSON),
+  comments: JSON.parse(commentsJSON),
   username: localStorage.username || '',
 };
 

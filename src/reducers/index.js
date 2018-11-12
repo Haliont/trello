@@ -26,8 +26,18 @@ const cards = handleActions({
   },
 }, {});
 
+const activeCardId = handleActions({
+  [actions.openCard](_, { payload: id }) {
+    return id;
+  },
+  [actions.closeCard]() {
+    return null;
+  },
+}, null);
+
 export default combineReducers({
   lists,
   cards,
   username,
+  activeCardId,
 });

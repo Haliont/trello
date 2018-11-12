@@ -1,8 +1,10 @@
 import './ModalCard.css';
-import React from 'react';
+import React, { Component } from 'react';
 import TextEditor from './TextEditor';
 import Comment from './Comment';
 import AddCommentForm from './AddCommentForm';
+
+// import { setCardTitle } from '../actions';
 
 function ModalCardDesc({ desc, onSetDesc }) {
   return (
@@ -50,7 +52,8 @@ function ModalCardHeader({
 }
 
 function ModalCardComments({
-  comments, onAddComment, onUpdateComment, onRemoveComment,
+  comments, onAddComment,
+  // onUpdateComment, onRemoveComment,
 }) {
   return (
     <div className="mb">
@@ -64,8 +67,8 @@ function ModalCardComments({
                 key={id}
                 text={text}
                 author={author}
-                onUpdateComment={onUpdateComment(id)}
-                onRemoveComment={onRemoveComment(id)}
+                // onUpdateComment={onUpdateComment(id)}
+                // onRemoveComment={onRemoveComment(id)}
               />
             ))
         }
@@ -78,41 +81,82 @@ function ModalCardComments({
   );
 }
 
-function ModalCard({
-  title,
-  listTitle,
-  desc,
-  author,
-  onSetDesc,
-  onSetTitle,
-  comments,
-  onAddComment,
-  onRemoveComment,
-  onSetCommentText,
-}) {
-  return (
-    <div className="modal-card">
-      <ModalCardHeader
-        title={title}
-        author={author}
-        listTitle={listTitle}
-        onSetTitle={onSetTitle}
-      />
-      <section className="modal-card-body">
-        <ModalCardDesc
-          desc={desc}
-          onSetDesc={onSetDesc}
+class ModalCard extends Component {
+  // handleSetCardTitle = cardId => (newTitle) => {
+  //   const { dispatch } = this.props;
+  //   dispatch(setCardTitle);
+  // };
+
+  // handleSetCardDesc = cardId => (newDesc) => {
+  //   this.setState(({ cards }) => ({
+  //     cards: setCardDesc(cardId, newDesc, cards),
+  //   }));
+  // };
+
+  // handleAddComment = cardId => (commentText) => {
+  //   const { username } = this.props;
+
+  //   const newComment = {
+  //     id: uid(),
+  //     text: commentText,
+  //     author: username,
+  //     cardId,
+  //   };
+
+  //   this.setState(({ comments }) => ({
+  //     comments: addComment(newComment, comments),
+  //   }));
+  // };
+
+  // handleRemoveComment = commentId => () => {
+  //   this.setState(({ comments }) => ({
+  //     comments: removeComment(commentId, comments),
+  //   }));
+  // };
+
+  // handleSetCommentText = commentId => (newCommentText) => {
+  //   this.setState(({ comments }) => ({
+  //     comments: setCommentText(commentId, newCommentText, comments),
+  //   }));
+  // };
+
+  handle = () => {
+
+  };
+
+  render() {
+    const {
+      desc,
+      title,
+      author,
+      comments,
+      listTitle,
+    } = this.props;
+
+    return (
+      <div className="modal-card">
+        <ModalCardHeader
+          title={title}
+          author={author}
+          listTitle={listTitle}
+          // onSetTitle={onSetTitle}
         />
-        <ModalCardComments
-          comments={comments}
-          onAddComment={onAddComment}
-          onUpdateComment={onSetCommentText}
-          onRemoveComment={onRemoveComment}
-        />
-      </section>
-      <footer className="modal-card-foot" />
-    </div>
-  );
+        <section className="modal-card-body">
+          <ModalCardDesc
+            desc={desc}
+            // onSetDesc={onSetDesc}
+          />
+          <ModalCardComments
+            comments={comments}
+            // onAddComment={onAddComment}
+            // onUpdateComment={onSetCommentText}
+            // onRemoveComment={onRemoveComment}
+          />
+        </section>
+        <footer className="modal-card-foot" />
+      </div>
+    );
+  }
 }
 
 export default ModalCard;
