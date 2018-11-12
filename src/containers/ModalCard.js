@@ -12,9 +12,15 @@ import { getCommentsByCardId } from '../state-helpers/comments';
 import { getCard } from '../state-helpers/cards';
 import { getList } from '../state-helpers/lists';
 
-const mapStateToProps = ({
-  lists, cards, comments, username,
-}, { activeCardId }) => {
+const mapStateToProps = (
+  {
+    lists,
+    cards,
+    comments,
+    username,
+  },
+  { activeCardId },
+) => {
   const {
     title, author, desc, listId,
   } = getCard(activeCardId, cards);
