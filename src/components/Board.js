@@ -7,7 +7,7 @@ import { uid } from '../helpers';
 
 import {
   // addCard,
-  removeCard,
+  // removeCard,
   setCardTitle,
   setCardDesc,
   // getCard,
@@ -18,11 +18,15 @@ import {
   addComment,
   setCommentText,
   removeComment,
-  removeCommentsByCardId,
+  // removeCommentsByCardId,
   // getCommentsByCardId,
 } from '../state-helpers/comments';
 
-import { setListTitle, addCard } from '../actions';
+import {
+  setListTitle,
+  addCard,
+  removeCard,
+} from '../actions';
 
 class Board extends Component {
   handleCloseCard = () => {
@@ -56,14 +60,8 @@ class Board extends Component {
 
   handleRemoveCard = cardId => (event) => {
     event.stopPropagation();
-
-    this.setState(({ cards, comments }) => {
-      const newComments = removeCommentsByCardId(cardId, comments);
-      return {
-        comments: newComments,
-        cards: removeCard(cardId, cards),
-      };
-    });
+    const { dispatch } = this.props;
+    dispatch(removeCard(cardId));
   };
 
   handleSetCardTitle = cardId => (newTitle) => {
@@ -118,7 +116,7 @@ class Board extends Component {
               comments={comments}
               onSetTitle={this.handleSetListTitle(id)}
               // onOpenCard={this.handleOpenCard}
-              // onRemoveCard={this.handleRemoveCard}
+              onRemoveCard={this.handleRemoveCard}
               onAddNewCard={this.handleAddCard(id)}
             />
           ))}

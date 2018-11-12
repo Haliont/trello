@@ -14,7 +14,7 @@ function CardList(props) {
     onSetTitle,
     // onOpenCard,
     onAddNewCard,
-    // onRemoveCard,
+    onRemoveCard,
   } = props;
 
   return (
@@ -33,7 +33,7 @@ function CardList(props) {
               key={id}
               title={cardTitle}
               // onOpen={onOpenCard(id)}
-              // onRemove={onRemoveCard(id)}
+              onRemove={onRemoveCard(id)}
               // commentsCount={getCommentsByCardId(id, comments).length}
             />
           ))}

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
+import { omit } from 'lodash';
 import { uid } from '../helpers';
 import * as actions from '../actions';
 
@@ -19,6 +20,9 @@ const cards = handleActions({
   [actions.addCard](state, { payload: card }) {
     const cardId = uid();
     return { ...state, [cardId]: { id: cardId, ...card } };
+  },
+  [actions.removeCard](state, { payload: id }) {
+    return omit(state, [id]);
   },
 }, {});
 

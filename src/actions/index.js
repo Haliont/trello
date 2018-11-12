@@ -8,3 +8,4 @@ export const closeCard = createAction('CLOSE_CARD');
 export const setListTitle = createAction('SET_LIST_TITLE');
 
 export const addCard = createAction('ADD_CARD');
+export const removeCard = createAction('REMOVE_CARD');
