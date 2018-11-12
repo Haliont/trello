@@ -15,10 +15,12 @@ store.subscribe(() => {
     cards,
     lists,
     username,
+    comments,
   } = store.getState();
 
   localStorage.cards = JSON.stringify(cards);
   localStorage.lists = JSON.stringify(lists);
+  localStorage.comments = JSON.stringify(comments);
   localStorage.username = username;
 });
 
