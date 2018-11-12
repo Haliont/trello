@@ -4,19 +4,17 @@ import Card from './Card';
 import AddCardForm from './AddCardForm';
 import TextEditor from './TextEditor';
 
-// import { getCommentsByCardId } from '../state-helpers/comments';
+import { getCommentsByCardId } from '../state-helpers/comments';
 
-function CardList(props) {
-  const {
-    title,
-    cards,
-    // comments,
-    onSetTitle,
-    onOpenCard,
-    onAddNewCard,
-    onRemoveCard,
-  } = props;
-
+function CardList({
+  title,
+  cards,
+  comments,
+  onSetTitle,
+  onOpenCard,
+  onAddNewCard,
+  onRemoveCard,
+}) {
   return (
     <div className="CardList">
       <div className="CardList-Content panel">
@@ -34,8 +32,7 @@ function CardList(props) {
               title={cardTitle}
               onOpen={onOpenCard(id)}
               onRemove={onRemoveCard(id)}
-              commentsCount={0}
-              // commentsCount={getCommentsByCardId(id, comments).length}
+              commentsCount={getCommentsByCardId(id, comments).length}
             />
           ))}
         </div>
