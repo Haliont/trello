@@ -12,12 +12,12 @@ import store from './store';
 
 store.subscribe(() => {
   const {
-    // cards,
+    cards,
     lists,
     username,
   } = store.getState();
 
-  // localStorage.cards = JSON.stringify(cards);
+  localStorage.cards = JSON.stringify(cards);
   localStorage.lists = JSON.stringify(lists);
   localStorage.username = username;
 });

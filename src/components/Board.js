@@ -6,12 +6,12 @@ import CardList from './CardList';
 import { uid } from '../helpers';
 
 import {
-  addCard,
+  // addCard,
   removeCard,
   setCardTitle,
   setCardDesc,
   // getCard,
-  // getCardsByListId,
+  getCardsByListId,
 } from '../state-helpers/cards';
 
 import {
@@ -22,16 +22,9 @@ import {
   // getCommentsByCardId,
 } from '../state-helpers/comments';
 
-import { setListTitle } from '../actions';
+import { setListTitle, addCard } from '../actions';
 
 class Board extends Component {
-  state = {
-    // lists: initialLists,
-    // cards: {},
-    // comments: {},
-    // activeCardId: null,
-  };
-
   handleCloseCard = () => {
     // this.setState({ isCardOpen: false, activeCardId: null });
   };
@@ -46,19 +39,19 @@ class Board extends Component {
   };
 
   handleAddCard = listId => (newCardTitle) => {
-    const { username } = this.props;
+    const {
+      username,
+      dispatch,
+    } = this.props;
 
     const newCard = {
-      id: uid(),
       title: newCardTitle,
       author: username,
       desc: '',
       listId,
     };
 
-    this.setState(({ cards }) => ({
-      cards: addCard(newCard, cards),
-    }));
+    dispatch(addCard(newCard));
   };
 
   handleRemoveCard = cardId => (event) => {
@@ -113,7 +106,7 @@ class Board extends Component {
   };
 
   renderLists() {
-    const { lists, cards } = this.props;
+    const { lists, cards, comments } = this.props;
     return (
       <div className="Board-ListsWrapper">
         <div className="Board-Lists">
@@ -121,13 +114,12 @@ class Board extends Component {
             <CardList
               key={id}
               title={title}
-              cards={cards}
-              // cards={getCardsByListId(id, cards)}
-              // comments={comments}
+              cards={getCardsByListId(id, cards)}
+              comments={comments}
               onSetTitle={this.handleSetListTitle(id)}
               // onOpenCard={this.handleOpenCard}
               // onRemoveCard={this.handleRemoveCard}
-              // onAddNewCard={this.handleAddCard(id)}
+              onAddNewCard={this.handleAddCard(id)}
             />
           ))}
         </div>

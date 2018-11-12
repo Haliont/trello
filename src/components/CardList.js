@@ -1,6 +1,6 @@
 import './CardList.css';
 import React from 'react';
-// import Card from './Card';
+import Card from './Card';
 import AddCardForm from './AddCardForm';
 import TextEditor from './TextEditor';
 
@@ -9,7 +9,7 @@ import TextEditor from './TextEditor';
 function CardList(props) {
   const {
     title,
-    // cards,
+    cards,
     // comments,
     onSetTitle,
     // onOpenCard,
@@ -27,17 +27,17 @@ function CardList(props) {
           formDirection="row"
           viewClassName="panel-heading"
         />
-        {/* <div className="CardList-Cards panel-block">
+        <div className="CardList-Cards panel-block">
           {cards.map(({ id, title: cardTitle }) => (
             <Card
               key={id}
               title={cardTitle}
-              onOpen={onOpenCard(id)}
-              onRemove={onRemoveCard(id)}
-              commentsCount={getCommentsByCardId(id, comments).length}
+              // onOpen={onOpenCard(id)}
+              // onRemove={onRemoveCard(id)}
+              // commentsCount={getCommentsByCardId(id, comments).length}
             />
           ))}
-        </div> */}
+        </div>
         <div className="CardList-Footer panel-block">
           <AddCardForm onAddNewCard={onAddNewCard} />
         </div>

@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
+import { uid } from '../helpers';
 import * as actions from '../actions';
 
 const username = handleActions({
@@ -14,7 +15,15 @@ const lists = handleActions({
   },
 }, {});
 
+const cards = handleActions({
+  [actions.addCard](state, { payload: card }) {
+    const cardId = uid();
+    return { ...state, [cardId]: { id: cardId, ...card } };
+  },
+}, {});
+
 export default combineReducers({
   lists,
+  cards,
   username,
 });
