@@ -4,8 +4,6 @@ import TextEditor from './TextEditor';
 import Comment from './Comment';
 import AddCommentForm from './AddCommentForm';
 
-// import { setCardTitle } from '../actions';
-
 function ModalCardDesc({ desc, onSetDesc }) {
   return (
     <div className="mb">
@@ -52,8 +50,8 @@ function ModalCardHeader({
 }
 
 function ModalCardComments({
-  comments, onAddComment,
-  // onUpdateComment, onRemoveComment,
+  comments, onAddComment, onRemoveComment,
+  // onUpdateComment
 }) {
   return (
     <div className="mb">
@@ -68,7 +66,7 @@ function ModalCardComments({
                 text={text}
                 author={author}
                 // onUpdateComment={onUpdateComment(id)}
-                // onRemoveComment={onRemoveComment(id)}
+                onRemoveComment={onRemoveComment(id)}
               />
             ))
         }
@@ -103,11 +101,10 @@ class ModalCard extends Component {
     addComment(newComment);
   };
 
-  // handleRemoveComment = commentId => () => {
-  //   this.setState(({ comments }) => ({
-  //     comments: removeComment(commentId, comments),
-  //   }));
-  // };
+  handleRemoveComment = commentId => () => {
+    const { removeComment } = this.props;
+    removeComment(commentId);
+  };
 
   // handleSetCommentText = commentId => (newCommentText) => {
   //   this.setState(({ comments }) => ({
@@ -141,7 +138,7 @@ class ModalCard extends Component {
             comments={comments}
             onAddComment={this.handleAddComment}
             // onUpdateComment={onSetCommentText}
-            // onRemoveComment={onRemoveComment}
+            onRemoveComment={this.handleRemoveComment}
           />
         </section>
         <footer className="modal-card-foot" />

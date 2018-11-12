@@ -50,9 +50,9 @@ const comments = handleActions({
     const commentId = uid();
     return { ...state, [commentId]: { id: commentId, ...comment } };
   },
-  // [actions.removeComment](state, { payload: id }) {
-  //   return omit(state, [id]);
-  // },
+  [actions.removeComment](state, { payload: id }) {
+    return omit(state, [id]);
+  },
 }, {});
 
 export default combineReducers({
