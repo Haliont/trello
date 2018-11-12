@@ -1,7 +1,10 @@
 import { connect } from 'react-redux';
 import ModalCard from '../components/ModalCard';
 
-import { setCardTitle } from '../actions';
+import {
+  setCardTitle,
+  setCardDesc,
+} from '../actions';
 
 import { getCommentsByCardId } from '../state-helpers/comments';
 import { getCard } from '../state-helpers/cards';
@@ -26,8 +29,9 @@ const mapStateToProps = ({
   };
 };
 
-const mapDispatchToProps = (dispatch, { activeCardId }) => ({
-  setCardTitle: title => dispatch(setCardTitle({ id: activeCardId, title })),
+const mapDispatchToProps = (dispatch, { activeCardId: id }) => ({
+  setCardTitle: title => dispatch(setCardTitle({ id, title })),
+  setCardDesc: desc => dispatch(setCardDesc({ id, desc })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalCard);

@@ -29,6 +29,11 @@ const cards = handleActions({
     const updatedCard = { ...card, title };
     return { ...state, [id]: updatedCard };
   },
+  [actions.setCardDesc](state, { payload: { id, desc } }) {
+    const card = state[id];
+    const updatedCard = { ...card, desc };
+    return { ...state, [id]: updatedCard };
+  },
 }, {});
 
 const activeCardId = handleActions({

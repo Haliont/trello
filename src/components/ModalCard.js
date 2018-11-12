@@ -87,11 +87,10 @@ class ModalCard extends Component {
     setCardTitle(newTitle);
   };
 
-  // handleSetCardDesc = cardId => (newDesc) => {
-  //   this.setState(({ cards }) => ({
-  //     cards: setCardDesc(cardId, newDesc, cards),
-  //   }));
-  // };
+  handleSetCardDesc = (newDesc) => {
+    const { setCardDesc } = this.props;
+    setCardDesc(newDesc);
+  };
 
   // handleAddComment = cardId => (commentText) => {
   //   const { username } = this.props;
@@ -120,10 +119,6 @@ class ModalCard extends Component {
   //   }));
   // };
 
-  handle = () => {
-
-  };
-
   render() {
     const {
       desc,
@@ -144,7 +139,7 @@ class ModalCard extends Component {
         <section className="modal-card-body">
           <ModalCardDesc
             desc={desc}
-            // onSetDesc={onSetDesc}
+            onSetDesc={this.handleSetCardDesc}
           />
           <ModalCardComments
             comments={comments}
