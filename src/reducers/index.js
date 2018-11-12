@@ -24,6 +24,11 @@ const cards = handleActions({
   [actions.removeCard](state, { payload: id }) {
     return omit(state, [id]);
   },
+  [actions.setCardTitle](state, { payload: { id, title } }) {
+    const card = state[id];
+    const updatedCard = { ...card, title };
+    return { ...state, [id]: updatedCard };
+  },
 }, {});
 
 const activeCardId = handleActions({

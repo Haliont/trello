@@ -81,7 +81,7 @@ class Board extends Component {
         {this.renderLists()}
         {activeCardId && (
           <Modal isOpen onClose={this.handleCloseCard}>
-            <ModalCard />
+            <ModalCard activeCardId={activeCardId} />
           </Modal>
         )}
       </div>

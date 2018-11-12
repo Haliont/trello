@@ -82,10 +82,10 @@ function ModalCardComments({
 }
 
 class ModalCard extends Component {
-  // handleSetCardTitle = cardId => (newTitle) => {
-  //   const { dispatch } = this.props;
-  //   dispatch(setCardTitle);
-  // };
+  handleSetCardTitle = (newTitle) => {
+    const { setCardTitle } = this.props;
+    setCardTitle(newTitle);
+  };
 
   // handleSetCardDesc = cardId => (newDesc) => {
   //   this.setState(({ cards }) => ({
@@ -139,7 +139,7 @@ class ModalCard extends Component {
           title={title}
           author={author}
           listTitle={listTitle}
-          // onSetTitle={onSetTitle}
+          onSetTitle={this.handleSetCardTitle}
         />
         <section className="modal-card-body">
           <ModalCardDesc
