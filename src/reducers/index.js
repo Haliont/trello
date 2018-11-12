@@ -45,9 +45,20 @@ const activeCardId = handleActions({
   },
 }, null);
 
+const comments = handleActions({
+  [actions.addComment](state, { payload: comment }) {
+    const commentId = uid();
+    return { ...state, [commentId]: { id: commentId, ...comment } };
+  },
+  // [actions.removeComment](state, { payload: id }) {
+  //   return omit(state, [id]);
+  // },
+}, {});
+
 export default combineReducers({
   lists,
   cards,
+  comments,
   username,
   activeCardId,
 });

@@ -4,6 +4,7 @@ import ModalCard from '../components/ModalCard';
 import {
   setCardTitle,
   setCardDesc,
+  addComment,
 } from '../actions';
 
 import { getCommentsByCardId } from '../state-helpers/comments';
@@ -32,6 +33,7 @@ const mapStateToProps = ({
 const mapDispatchToProps = (dispatch, { activeCardId: id }) => ({
   setCardTitle: title => dispatch(setCardTitle({ id, title })),
   setCardDesc: desc => dispatch(setCardDesc({ id, desc })),
+  addComment: comment => dispatch(addComment({ cardId: id, ...comment })),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalCard);

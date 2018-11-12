@@ -92,20 +92,16 @@ class ModalCard extends Component {
     setCardDesc(newDesc);
   };
 
-  // handleAddComment = cardId => (commentText) => {
-  //   const { username } = this.props;
+  handleAddComment = (commentText) => {
+    const { username, addComment } = this.props;
 
-  //   const newComment = {
-  //     id: uid(),
-  //     text: commentText,
-  //     author: username,
-  //     cardId,
-  //   };
+    const newComment = {
+      text: commentText,
+      author: username,
+    };
 
-  //   this.setState(({ comments }) => ({
-  //     comments: addComment(newComment, comments),
-  //   }));
-  // };
+    addComment(newComment);
+  };
 
   // handleRemoveComment = commentId => () => {
   //   this.setState(({ comments }) => ({
@@ -143,7 +139,7 @@ class ModalCard extends Component {
           />
           <ModalCardComments
             comments={comments}
-            // onAddComment={onAddComment}
+            onAddComment={this.handleAddComment}
             // onUpdateComment={onSetCommentText}
             // onRemoveComment={onRemoveComment}
           />

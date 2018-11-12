@@ -28,7 +28,7 @@ const preloadState = {
   cards: JSON.parse(cardsJSON),
   lists: JSON.parse(listsJSON),
   comments: JSON.parse(commentsJSON),
-  username: localStorage.username || '',
+  username: localStorage.username || 'Zemliakov K.',
 };
 
 export default createStore(
