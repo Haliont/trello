@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
-import { omit } from 'lodash';
+import { omit, omitBy } from 'lodash';
 import { uid } from '../helpers';
 import * as actions from '../actions';
 
@@ -52,6 +52,9 @@ const comments = handleActions({
   },
   [actions.removeComment](state, { payload: id }) {
     return omit(state, [id]);
+  },
+  [actions.removeCard](state, { payload: id }) {
+    return omitBy(state, ({ cardId }) => cardId === id);
   },
 }, {});
 
