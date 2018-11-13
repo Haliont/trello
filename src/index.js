@@ -9,19 +9,8 @@ import App from './containers/App';
 import store from './store';
 
 store.subscribe(() => {
-  const {
-    cards,
-    lists,
-    username,
-    comments,
-    isRegistered,
-  } = store.getState();
-
-  localStorage.cards = JSON.stringify(cards);
-  localStorage.lists = JSON.stringify(lists);
-  localStorage.comments = JSON.stringify(comments);
-  localStorage.username = username;
-  localStorage.isRegistered = isRegistered;
+  const state = store.getState();
+  localStorage.state = JSON.stringify(state);
 });
 
 ReactDOM.render(

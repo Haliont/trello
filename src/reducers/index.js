@@ -4,17 +4,36 @@ import { omit, omitBy } from 'lodash';
 import { uid } from '../helpers';
 import * as actions from '../actions';
 
-const username = handleActions({
-  [actions.updateUsername](_, { payload: newName }) {
-    return newName;
+const initialLists = {
+  0: {
+    id: 0,
+    title: 'TODO',
   },
-}, '');
+  1: {
+    id: 1,
+    title: 'In Progress',
+  },
+  2: {
+    id: 2,
+    title: 'Testing',
+  },
+  3: {
+    id: 3,
+    title: 'Done',
+  },
+};
 
 const lists = handleActions({
   [actions.setListTitle](state, { payload: { id, title } }) {
     return { ...state, [id]: { ...state[id], title } };
   },
-}, {});
+}, initialLists);
+
+const username = handleActions({
+  [actions.updateUsername](_, { payload: newName }) {
+    return newName;
+  },
+}, '');
 
 const cards = handleActions({
   [actions.addCard](state, { payload: card }) {
