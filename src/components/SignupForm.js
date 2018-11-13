@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function SignupForm({ onSubmit, onChange, value }) {
   return (
@@ -31,5 +32,11 @@ function SignupForm({ onSubmit, onChange, value }) {
     </form>
   );
 }
+
+SignupForm.propTypes = {
+  value: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+};
 
 export default SignupForm;
