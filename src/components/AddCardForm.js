@@ -1,7 +1,6 @@
-import React, { Component } from 'react';
 import './AddCardForm.css';
-
-// TODO: поправить стили
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 const Form = ({
   valueChange, value, onSubmit, onClose,
@@ -43,6 +42,10 @@ const OpenForm = ({ toggleAddingMode }) => (
 );
 
 class AddCardForm extends Component {
+  static propTypes = {
+    onAddNewCard: PropTypes.func.isRequired,
+  };
+
   static OpenForm = OpenForm;
 
   static Form = Form;
