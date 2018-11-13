@@ -1,15 +1,14 @@
-const updateItem = (itemId, newValues = {}, items) => {
-  const index = items.findIndex(({ id }) => id === itemId);
-  const newItem = { ...items[index], ...newValues };
-  const newItems = [
-    ...items.slice(0, index),
-    newItem,
-    ...items.slice(index + 1),
-  ];
-  return newItems;
-};
+import { pickBy } from 'lodash';
 
-const uid = (function init() {
+export const getCard = (id, cards) => cards[id];
+export const getList = (id, lists) => lists[id];
+export const getCardsByListId = (listId, cards) => Object
+  .values(pickBy(cards, card => card.listId === listId));
+
+export const getCommentsByCardId = (cardId, comments) => Object
+  .values(pickBy(comments, comment => comment.cardId === cardId));
+
+export const uid = (function init() {
   const { storedId } = localStorage;
 
   let currentId;
@@ -27,5 +26,3 @@ const uid = (function init() {
 
   return next;
 }());
-
-export { uid, updateItem };

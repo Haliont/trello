@@ -4,7 +4,7 @@ import Card from './Card';
 import AddCardForm from './AddCardForm';
 import TextEditor from './TextEditor';
 
-import { getCommentsByCardId } from '../state-helpers/comments';
+import { getCommentsByCardId } from '../helpers';
 
 function CardList({
   title,

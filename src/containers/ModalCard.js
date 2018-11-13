@@ -8,9 +8,11 @@ import {
   removeComment,
 } from '../actions';
 
-import { getCommentsByCardId } from '../state-helpers/comments';
-import { getCard } from '../state-helpers/cards';
-import { getList } from '../state-helpers/lists';
+import {
+  getCard,
+  getList,
+  getCommentsByCardId,
+} from '../helpers';
 
 const mapStateToProps = (
   {

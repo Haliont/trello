@@ -4,7 +4,7 @@ import CardList from './CardList';
 import Modal from './Modal';
 import ModalCard from '../containers/ModalCard';
 
-import { getCardsByListId } from '../state-helpers/cards';
+import { getCardsByListId } from '../helpers';
 
 class Board extends Component {
   handleCloseCard = () => {
