@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Modal extends Component {
+  static defaultProps = {
+    isOpen: false,
+    bgColor: null,
+    onClose: () => {},
+    isResealable: true,
+  };
+
+  static propTypes = {
+    isOpen: PropTypes.oneOf([true, false]),
+    bgColor: PropTypes.string,
+    onClose: PropTypes.func,
+    isResealable: PropTypes.oneOf([true, false]),
+  }
+
   componentWillMount() {
     window.addEventListener('keyup', this.handleKeyUp);
   }
@@ -20,8 +35,8 @@ class Modal extends Component {
   render() {
     const {
       children,
-      isResealable = true,
-      isOpen = false,
+      isResealable,
+      isOpen,
       onClose,
       bgColor,
     } = this.props;
