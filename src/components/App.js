@@ -2,21 +2,20 @@ import React, { Component } from 'react';
 import Modal from './Modal';
 import Board from '../containers/Board';
 import SignupForm from './SignupForm';
-import { updateUsername, signup } from '../actions';
 
 class App extends Component {
   handleSignup = (event) => {
     event.preventDefault();
-    const { dispatch, username } = this.props;
+    const { signup, username } = this.props;
     if (username === '') {
       return;
     }
-    dispatch(signup());
+    signup();
   };
 
   handleUserNameChange = ({ target }) => {
-    const { dispatch } = this.props;
-    dispatch(updateUsername(target.value));
+    const { updateUsername } = this.props;
+    updateUsername(target.value);
   };
 
   render() {

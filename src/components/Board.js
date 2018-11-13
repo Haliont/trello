@@ -6,34 +6,26 @@ import ModalCard from '../containers/ModalCard';
 
 import { getCardsByListId } from '../state-helpers/cards';
 
-import {
-  setListTitle,
-  addCard,
-  removeCard,
-  openCard,
-  closeCard,
-} from '../actions';
-
 class Board extends Component {
   handleCloseCard = () => {
-    const { dispatch } = this.props;
-    dispatch(closeCard());
+    const { closeCard } = this.props;
+    closeCard();
   };
 
   handleOpenCard = cardId => () => {
-    const { dispatch } = this.props;
-    dispatch(openCard(cardId));
+    const { openCard } = this.props;
+    openCard(cardId);
   };
 
   handleSetListTitle = listId => (newTitle) => {
-    const { dispatch } = this.props;
-    dispatch(setListTitle({ id: listId, title: newTitle }));
+    const { setListTitle } = this.props;
+    setListTitle({ id: listId, title: newTitle });
   };
 
   handleAddCard = listId => (newCardTitle) => {
     const {
       username,
-      dispatch,
+      addCard,
     } = this.props;
 
     const newCard = {
@@ -43,13 +35,13 @@ class Board extends Component {
       listId,
     };
 
-    dispatch(addCard(newCard));
+    addCard(newCard);
   };
 
   handleRemoveCard = cardId => (event) => {
     event.stopPropagation();
-    const { dispatch } = this.props;
-    dispatch(removeCard(cardId));
+    const { removeCard } = this.props;
+    removeCard(cardId);
   };
 
   renderLists() {
