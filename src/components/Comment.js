@@ -1,5 +1,6 @@
 import './Comment.css';
 import React from 'react';
+import PropTypes from 'prop-types';
 import TextEditor from './TextEditor';
 
 function Comment({
@@ -31,5 +32,12 @@ function Comment({
     </div>
   );
 }
+
+Comment.propTypes = {
+  text: PropTypes.string.isRequired,
+  author: PropTypes.string.isRequired,
+  onUpdateComment: PropTypes.func.isRequired,
+  onRemoveComment: PropTypes.func.isRequired,
+};
 
 export default Comment;
