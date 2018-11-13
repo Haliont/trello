@@ -1,5 +1,6 @@
 import './Board.css';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import CardList from './CardList';
 import Modal from './Modal';
 import ModalCard from '../containers/ModalCard';
@@ -7,6 +8,20 @@ import ModalCard from '../containers/ModalCard';
 import { getCardsByListId } from '../helpers';
 
 class Board extends Component {
+  static propTypes = {
+    lists: PropTypes.instanceOf(Array).isRequired,
+    cards: PropTypes.instanceOf(Object).isRequired,
+    comments: PropTypes.instanceOf(Object).isRequired,
+    closeCard: PropTypes.func.isRequired,
+    openCard: PropTypes.func.isRequired,
+    setListTitle: PropTypes.func.isRequired,
+    addCard: PropTypes.func.isRequired,
+    removeCard: PropTypes.func.isRequired,
+    activeCardId: PropTypes.number,
+  };
+
+  static defaultProps = { activeCardId: null };
+
   handleCloseCard = () => {
     const { closeCard } = this.props;
     closeCard();
