@@ -1,5 +1,6 @@
 import './ModalCard.css';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import TextEditor from './TextEditor';
 import Comment from './Comment';
 import AddCommentForm from './AddCommentForm';
@@ -79,6 +80,19 @@ function ModalCardComments({
 }
 
 class ModalCard extends Component {
+  static propTypes = {
+    desc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+    comments: PropTypes.instanceOf(Array).isRequired,
+    listTitle: PropTypes.string.isRequired,
+    addComment: PropTypes.func.isRequired,
+    setCardDesc: PropTypes.func.isRequired,
+    setCardTitle: PropTypes.func.isRequired,
+    removeComment: PropTypes.func.isRequired,
+    setCommentText: PropTypes.func.isRequired,
+  };
+
   handleSetCardTitle = (newTitle) => {
     const { setCardTitle } = this.props;
     setCardTitle(newTitle);
