@@ -4,9 +4,7 @@ import './index.css';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-// import App from './components/App';
-
-import Board from './containers/Board';
+import App from './containers/App';
 
 import store from './store';
 
@@ -16,17 +14,19 @@ store.subscribe(() => {
     lists,
     username,
     comments,
+    isRegistered,
   } = store.getState();
 
   localStorage.cards = JSON.stringify(cards);
   localStorage.lists = JSON.stringify(lists);
   localStorage.comments = JSON.stringify(comments);
   localStorage.username = username;
+  localStorage.isRegistered = isRegistered;
 });
 
 ReactDOM.render(
   <Provider store={store}>
-    <Board />
+    <App />
   </Provider>,
   document.getElementById('root'),
 );

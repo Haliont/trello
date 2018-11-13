@@ -5,7 +5,7 @@ import { uid } from '../helpers';
 import * as actions from '../actions';
 
 const username = handleActions({
-  [actions.updateUsername](_, { payload: { newName } }) {
+  [actions.updateUsername](_, { payload: newName }) {
     return newName;
   },
 }, '');
@@ -58,10 +58,17 @@ const comments = handleActions({
   },
 }, {});
 
+const isRegistered = handleActions({
+  [actions.signup]() {
+    return true;
+  },
+}, false);
+
 export default combineReducers({
   lists,
   cards,
   comments,
   username,
   activeCardId,
+  isRegistered,
 });

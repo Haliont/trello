@@ -1,6 +1,6 @@
 import React from 'react';
 
-function SignupForm({ onSubmit, onChange }) {
+function SignupForm({ onSubmit, onChange, value }) {
   return (
     <form onSubmit={onSubmit}>
       <div className="field">
@@ -13,6 +13,7 @@ function SignupForm({ onSubmit, onChange }) {
             type="text"
             className="input is-large"
             placeholder="Example: Petya"
+            value={value}
             onChange={onChange}
           />
           <span className="icon is-small is-left">
