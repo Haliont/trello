@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { handleActions } from 'redux-actions';
 import { omit, omitBy } from 'lodash';
-import { uid } from '../helpers';
-import * as actions from '../actions';
+import { uid } from './helpers';
+import * as actions from './actions';
 
 const initialLists = {
   0: {
