@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Form from './Form';
 
 class AddCommentForm extends Component {
+  static propTypes = {
+    onAddComment: PropTypes.func.isRequired,
+  };
+
   state = { value: '' };
 
   valueChange = ({ target }) => {
