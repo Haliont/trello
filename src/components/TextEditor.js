@@ -1,5 +1,6 @@
 import './TextEditor.css';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Form from './Form';
 
 function View({
@@ -17,11 +18,26 @@ function View({
 }
 
 class TextEditor extends Component {
-  static View = View;
+  static propTypes = {
+    hint: PropTypes.string,
+    value: PropTypes.string,
+    btnText: PropTypes.string,
+    onTextSave: PropTypes.func.isRequired,
+    editorType: PropTypes.oneOf(['input', 'textarea']),
+    viewClassName: PropTypes.string,
+    formDirection: PropTypes.oneOf(['row', 'column']),
+  };
 
   static defaultProps = {
+    value: '',
+    btnText: '',
+    viewClassName: '',
     hint: 'Изменить текст',
+    editorType: 'textarea',
+    formDirection: 'column',
   };
+
+  static View = View;
 
   constructor(props) {
     super(props);
