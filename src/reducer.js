@@ -75,6 +75,11 @@ const comments = handleActions({
   [actions.removeCard](state, { payload: id }) {
     return omitBy(state, ({ cardId }) => cardId === id);
   },
+  [actions.setCommentText](state, { payload: { id, text } }) {
+    const comment = state[id];
+    const updatedComment = { ...comment, text };
+    return { ...state, [id]: updatedComment };
+  },
 }, {});
 
 const isRegistered = handleActions({

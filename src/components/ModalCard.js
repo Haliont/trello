@@ -50,8 +50,7 @@ function ModalCardHeader({
 }
 
 function ModalCardComments({
-  comments, onAddComment, onRemoveComment,
-  // onUpdateComment
+  comments, onAddComment, onRemoveComment, onSetCommentText,
 }) {
   return (
     <div className="mb">
@@ -65,7 +64,7 @@ function ModalCardComments({
                 key={id}
                 text={text}
                 author={author}
-                // onUpdateComment={onUpdateComment(id)}
+                onSetCommentText={onSetCommentText(id)}
                 onRemoveComment={onRemoveComment(id)}
               />
             ))
@@ -106,11 +105,10 @@ class ModalCard extends Component {
     removeComment(commentId);
   };
 
-  // handleSetCommentText = commentId => (newCommentText) => {
-  //   this.setState(({ comments }) => ({
-  //     comments: setCommentText(commentId, newCommentText, comments),
-  //   }));
-  // };
+  handleSetCommentText = commentId => (newCommentText) => {
+    const { setCommentText } = this.props;
+    setCommentText({ id: commentId, text: newCommentText });
+  };
 
   render() {
     const {
@@ -137,7 +135,7 @@ class ModalCard extends Component {
           <ModalCardComments
             comments={comments}
             onAddComment={this.handleAddComment}
-            // onUpdateComment={onSetCommentText}
+            onSetCommentText={this.handleSetCommentText}
             onRemoveComment={this.handleRemoveComment}
           />
         </section>

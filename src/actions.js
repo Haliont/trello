@@ -15,3 +15,4 @@ export const setCardDesc = createAction('SET_CARD_DESC');
 
 export const addComment = createAction('ADD_COMMENT');
 export const removeComment = createAction('REMOVE_COMMENT');
+export const setCommentText = createAction('SET_COMMENT_TEXT');
