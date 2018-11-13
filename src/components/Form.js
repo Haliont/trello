@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const getEditor = (type, props) => {
   switch (type) {
@@ -53,5 +54,19 @@ function Form({
     </form>
   );
 }
+
+Form.defaultProps = {
+  editorType: 'textarea',
+  formDirection: 'column',
+};
+
+Form.propTypes = {
+  value: PropTypes.string.isRequired,
+  btnText: PropTypes.string.isRequired,
+  editorType: PropTypes.oneOf(['input', 'textarea']),
+  formDirection: PropTypes.oneOf(['row', 'column']),
+  onChange: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default Form;
