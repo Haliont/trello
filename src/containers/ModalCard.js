@@ -8,7 +8,7 @@ import {
 } from '../helpers';
 
 import { setCardTitle, setCardDesc } from '../reducers/cards';
-import { addComment, removeComment } from '../reducers/comments';
+import { addComment, removeComment, setCommentText } from '../reducers/comments';
 
 const mapStateToProps = (
   {
@@ -40,6 +40,7 @@ const mapDispatchToProps = (dispatch, { activeCardId: id }) => ({
   setCardDesc: desc => dispatch(setCardDesc({ id, desc })),
   addComment: comment => dispatch(addComment({ cardId: id, ...comment })),
   removeComment: commentId => dispatch(removeComment(commentId)),
+  setCommentText: comment => dispatch(setCommentText(comment)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalCard);

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import TextEditor from './TextEditor';
 
 function Comment({
-  text, author, onUpdateComment, onRemoveComment,
+  text, author, onSetCommentText, onRemoveComment,
 }) {
   return (
     <div className="Comment card">
@@ -25,7 +25,7 @@ function Comment({
           <TextEditor
             value={text}
             btnText="Сохранить"
-            onTextSave={onUpdateComment}
+            onTextSave={onSetCommentText}
           />
         </div>
       </div>
@@ -36,7 +36,7 @@ function Comment({
 Comment.propTypes = {
   text: PropTypes.string.isRequired,
   author: PropTypes.string.isRequired,
-  onUpdateComment: PropTypes.func.isRequired,
+  onSetCommentText: PropTypes.func.isRequired,
   onRemoveComment: PropTypes.func.isRequired,
 };
 
