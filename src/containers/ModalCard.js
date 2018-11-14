@@ -2,17 +2,13 @@ import { connect } from 'react-redux';
 import ModalCard from '../components/ModalCard';
 
 import {
-  setCardTitle,
-  setCardDesc,
-  addComment,
-  removeComment,
-} from '../actions';
-
-import {
   getCard,
   getList,
   getCommentsByCardId,
 } from '../helpers';
+
+import { setCardTitle, setCardDesc } from '../reducers/cards';
+import { addComment, removeComment } from '../reducers/comments';
 
 const mapStateToProps = (
   {

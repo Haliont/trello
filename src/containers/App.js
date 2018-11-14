@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import App from '../components/App';
-import * as actions from '../actions';
+import { signup } from '../reducers/isRegistered';
+import { updateUsername } from '../reducers/username';
 
 const mapStateToProps = ({ username, isRegistered }) => ({ username, isRegistered });
 
-export default connect(mapStateToProps, actions)(App);
+export default connect(mapStateToProps, { signup, updateUsername })(App);

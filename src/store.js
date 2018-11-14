@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import reducer from './reducer';
+import reducer from './reducers';
 
 const preloadStateJSON = localStorage.state || JSON.stringify({});
 const preloadState = JSON.parse(preloadStateJSON);

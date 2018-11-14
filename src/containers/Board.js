@@ -1,6 +1,9 @@
 import { connect } from 'react-redux';
 import Board from '../components/Board';
-import * as actions from '../actions';
+import { setListTitle } from '../reducers/lists';
+
+import { addCard, removeCard } from '../reducers/cards';
+import { openCard, closeCard } from '../reducers/activeCardId';
 
 const mapStateToProps = ({
   username, lists, cards, comments, activeCardId,
@@ -12,4 +15,12 @@ const mapStateToProps = ({
   lists: Object.values(lists),
 });
 
-export default connect(mapStateToProps, actions)(Board);
+const mapDispatchToProps = {
+  setListTitle,
+  addCard,
+  openCard,
+  closeCard,
+  removeCard,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Board);
