@@ -1,0 +1,41 @@
+.Board {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.Board-Header {
+  flex: none;
+  height: auto;
+  padding: 8px 4px 8px 8px;
+  position: relative;
+  transition: padding 0.1s ease-in;
+  background: rgba(0, 196, 167, 0.24);
+}
+
+.Board-HeaderTitle {
+  color: #fff;
+  text-shadow: 0px 0px 1px #000;
+  cursor: default;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 32px;
+  padding-left: 4px;
+  text-decoration: none;
+}
+
+.Board-ListsWrapper {
+  flex-grow: 1;
+  position: relative;
+}
+
+.Board-Lists {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 15px;
+  overflow-x: auto;
+  white-space: nowrap;
+}

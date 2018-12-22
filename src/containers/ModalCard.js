@@ -1,46 +1,39 @@
 import { connect } from 'react-redux';
 import ModalCard from '../components/ModalCard';
 
-import {
-  getCard,
-  getList,
-  getCommentsByCardId,
-} from '../helpers';
+import * as cardsActions from '../store/cards/actions';
+import * as commentsActions from '../store/comments/actions';
 
-import { setCardTitle, setCardDesc } from '../reducers/cards';
-import { addComment, removeComment, setCommentText } from '../reducers/comments';
+import { getCommentsByCardId, getComments } from '../store/comments/selectors';
+import { getUsername } from '../store/user/selectors';
+import { getCardsMap } from '../store/cards/selectors';
 
 const mapStateToProps = (
-  {
-    lists,
-    cards,
-    comments,
-    username,
-  },
-  { activeCardId },
+  state,
+  { match: { params: { id } } },
 ) => {
   const {
-    title, author, desc, listId,
-  } = getCard(activeCardId, cards);
+    title, author, desc, state: cardState,
+  } = getCardsMap(state)[id];
 
-  const { title: listTitle } = getList(listId, lists);
+  const comments = getComments(state);
 
   return {
     desc,
     title,
     author,
-    username,
-    listTitle,
-    comments: getCommentsByCardId(activeCardId, comments),
+    username: getUsername(state),
+    listTitle: cardState,
+    comments: getCommentsByCardId(comments, id),
   };
 };
 
-const mapDispatchToProps = (dispatch, { activeCardId: id }) => ({
-  setCardTitle: title => dispatch(setCardTitle({ id, title })),
-  setCardDesc: desc => dispatch(setCardDesc({ id, desc })),
-  addComment: comment => dispatch(addComment({ cardId: id, ...comment })),
-  removeComment: commentId => dispatch(removeComment(commentId)),
-  setCommentText: comment => dispatch(setCommentText(comment)),
+const mapDispatchToProps = (dispatch, { match: { params: { id } } }) => ({
+  setCardTitle: title => dispatch(cardsActions.setCardTitle({ id, title })),
+  setCardDesc: desc => dispatch(cardsActions.setCardDesc({ id, desc })),
+  addComment: comment => dispatch(commentsActions.addComment({ cardId: id, ...comment })),
+  removeComment: commentId => dispatch(commentsActions.removeComment(commentId)),
+  setCommentText: comment => dispatch(commentsActions.setCommentText(comment)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalCard);

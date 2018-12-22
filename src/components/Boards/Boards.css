@@ -1,0 +1,89 @@
+.Boards {
+  padding: 40px 0;
+}
+
+.Boards-Inner {
+  margin: 0 auto;
+  max-width: 960px;
+  padding: 0 15px;
+}
+
+.Boards-Header {
+  line-height: 24px;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 11px;
+}
+
+.Boards-List {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -10px;
+}
+
+.Boards-Board {
+  width: 188px;
+  height: 98px;
+  border-radius: 4px;
+  margin: 10px;
+  background-color: #00c4a7;
+  color: #fff;
+  line-height: 20px;
+  padding: 8px;
+  position: relative;
+  text-decoration: none;
+}
+
+.Boards-Board.Boards-Board--AddNew {
+  cursor: pointer;
+  display: flex;
+  text-align: center;
+  color: #6b808c;
+  font-weight: 400;
+  background: rgba(9, 45, 66, 0.08);
+}
+
+.Boards-Board.Boards-Board--AddNew .Boards-BoardTitle {
+  margin: auto;
+}
+
+.Boards-Board:hover {
+  color: #fff;
+}
+
+.Boards-Board:hover div {
+  color: #fff;
+}
+
+.Boards-Board:hover .Boards-BoardFade {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.Boards-BoardTitle {
+  flex: 0 0 auto;
+  font-size: 16px;
+  font-weight: 700;
+  display: inline-block;
+  overflow: hidden;
+  max-height: 40px;
+  width: 100%;
+  word-wrap: break-word;
+}
+
+.Boards-BoardTitle div {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+}
+
+.Boards-BoardFade {
+  border-radius: 4px;
+  background-color: rgba(0, 0, 0, 0);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}

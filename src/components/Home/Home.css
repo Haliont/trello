@@ -1,0 +1,26 @@
+.Home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100%;
+}
+
+.Home-Inner {
+  width: 100%;
+  max-width: 320px;
+}
+
+.Home-Nav {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.Home-NavBtn {
+  flex-grow: 1;
+  margin-right: 15px;
+}
+
+.Home-NavBtn:last-child {
+  margin-right: 0;
+}

@@ -1,3 +1,6 @@
+@import url('./styles/buttons.css');
+@import url('./styles/reusable.css');
+
 html,
 body {
   display: flex;
@@ -6,6 +9,7 @@ body {
 }
 
 #root {
+  height: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
@@ -26,4 +30,8 @@ body {
 .btn-reset {
   border: none;
   background: none;
+}
+
+.panel {
+  padding: 5px;
 }

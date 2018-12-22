@@ -1,8 +1,9 @@
 import { connect } from 'react-redux';
+import * as userSelectors from '../store/user/selectors';
 import App from '../components/App';
-import { signup } from '../reducers/isRegistered';
-import { updateUsername } from '../reducers/username';
 
-const mapStateToProps = ({ username, isRegistered }) => ({ username, isRegistered });
+const mapStateToProps = state => ({
+  isSignedIn: userSelectors.isSignedIn(state),
+});
 
-export default connect(mapStateToProps, { signup, updateUsername })(App);
+export default connect(mapStateToProps)(App);

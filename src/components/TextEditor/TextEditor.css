@@ -1,0 +1,41 @@
+.TextEditor-Form {
+  display: flex;
+}
+
+.TextEditor-Form--Row {
+  flex-direction: row;
+}
+
+.TextEditor-Form--Column {
+  flex-direction: column;
+}
+
+.TextEditor-Form--Column .TextEditor-FormSubmit {
+  margin-top: 10px;
+}
+
+.TextEditor-FormField {
+  flex-grow: 1;
+}
+
+.TextEditor-View {
+  position: relative;
+}
+
+.TextEditor-View:hover .TextEditor-ViewPencil {
+  opacity: 1;
+}
+
+.TextEditor-ViewPencil {
+  width: 20px;
+  height: 20px;
+  background-position: center;
+  background-size: contain;
+  background-image: url('./pencil.svg');
+  background-repeat: no-repeat;
+  position: absolute;
+  top: calc(22% - 2px);
+  right: 10px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}

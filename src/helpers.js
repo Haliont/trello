@@ -8,21 +8,23 @@ export const getCardsByListId = (listId, cards) => Object
 export const getCommentsByCardId = (cardId, comments) => Object
   .values(pickBy(comments, comment => comment.cardId === cardId));
 
-export const uid = (function init() {
-  const { storedId } = localStorage;
+// export const uid = (function init() {
+//   const { storedId } = localStorage;
 
-  let currentId;
-  if (!storedId) {
-    currentId = 0;
-  } else {
-    currentId = Number(storedId);
-  }
+//   let currentId;
+//   if (!storedId) {
+//     currentId = 0;
+//   } else {
+//     currentId = Number(storedId);
+//   }
 
-  const next = () => {
-    currentId += 1;
-    localStorage.storedId = String(currentId);
-    return currentId;
-  };
+//   const next = () => {
+//     currentId += 1;
+//     localStorage.storedId = String(currentId);
+//     return currentId;
+//   };
 
-  return next;
-}());
+//   return next;
+// }());
+
+export const uid = () => Date.now();
