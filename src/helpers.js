@@ -12,12 +12,7 @@ const updateItem = (itemId, newValues = {}, items) => {
 const uid = (function init() {
   const { storedId } = localStorage;
 
-  let currentId;
-  if (!storedId) {
-    currentId = 0;
-  } else {
-    currentId = Number(storedId);
-  }
+  let currentId = Number(storedId || 0);
 
   const next = () => {
     currentId += 1;
